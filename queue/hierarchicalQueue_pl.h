@@ -1,11 +1,10 @@
 #include "Level.h"
-#include "Flow.h"
+#include "Flow_pl.h"
 #include <vector>
 #include <map>
-#include <tuple>
 using namespace std;
 
-class hierarchicalQueue : public Queue {
+class hierarchicalQueue_pl : public Queue {
 private:
     static const int DEFAULT_VOLUME = 3;
     int volume;                     // num of levels in scheduler
@@ -25,7 +24,7 @@ private:
     bool level1ServingB;          // is serve Back up Levels
 
     //vector<Flow> flows;
-    map<tuple<int, int>, Flow> flowMap;
+    map<vector<int>, Flow_pl> flowMap;
     //06262019 Peixuan
     vector<Packet*> pktCurRound;
 
@@ -34,9 +33,8 @@ private:
     vector<Packet*> serveUpperLevel(int);
     void setPktCount(int);
 public:
-    hierarchicalQueue();
-    Flow getFlow();
-    explicit hierarchicalQueue(int);
+    hierarchicalQueue_pl();
+    explicit hierarchicalQueue_pl(int);
     void enque(Packet*);
     Packet* deque();
     void setCurrentRound(int);
