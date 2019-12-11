@@ -1,21 +1,22 @@
 #include <cmath>
 
-#include "hierarchicalQueue.h"
+#include "hierarchicalQueue_pl.h"
+//#include <tuple>
 
-static class hierarchicalQueueClass : public TclClass {
+static class hierarchicalQueue_plClass : public TclClass {
 public:
-        hierarchicalQueueClass() : TclClass("Queue/HRCC") {}
+        hierarchicalQueue_plClass() : TclClass("Queue/HRCCPL") {}
         TclObject* create(int, const char*const*) {
             fprintf(stderr, "Created new TCL HCS instance\n"); // Debug: Peixuan 07062019
-            return (new hierarchicalQueue);
+            return (new hierarchicalQueue_pl);
     }
 } class_hierarchical_queue;
 
-hierarchicalQueue::hierarchicalQueue():hierarchicalQueue(DEFAULT_VOLUME) {
+hierarchicalQueue_pl::hierarchicalQueue_pl():hierarchicalQueue_pl(DEFAULT_VOLUME) {
     fprintf(stderr, "Created new HCS instance\n"); // Debug: Peixuan 07062019
 }
 
-hierarchicalQueue::hierarchicalQueue(int volume) {
+hierarchicalQueue_pl::hierarchicalQueue_pl(int volume) {
     fprintf(stderr, "Created new HCS instance with volumn = %d\n", volume); // Debug: Peixuan 07062019
     this->volume = volume;
     // tuple<int, int> key = make_tuple(iph->saddr, iph->daddr);
@@ -34,11 +35,11 @@ hierarchicalQueue::hierarchicalQueue(int volume) {
     //pktCurRound = new vector<Packet*>;
 }
 
-Flow hierarchicalQueue::getFlow(tuple<int, int> key) {
+Flow_pl hierarchicalQueue_pl::getFlow(tuple<int, int> key) {
     return flowMap[key];
 }
 
-void hierarchicalQueue::setCurrentRound(int currentRound) {
+void hierarchicalQueue_pl::setCurrentRound(int currentRound) {
     fprintf(stderr, "Set Current Round: %d\n", currentRound); // Debug: Peixuan 07062019
     this->currentRound = currentRound;
 
@@ -49,12 +50,12 @@ void hierarchicalQueue::setCurrentRound(int currentRound) {
 
 }
 
-void hierarchicalQueue::setPktCount(int pktCount) {
+void hierarchicalQueue_pl::setPktCount(int pktCount) {
     fprintf(stderr, "Set Packet Count: %d\n", pktCount); // Debug: Peixuan 07072019
     this->pktCount = pktCount;
 }
 
-void hierarchicalQueue::enque(Packet* packet) {   
+void hierarchicalQueue_pl::enque(Packet* packet) {   
     
     hdr_ip* iph = hdr_ip::access(packet);
     int pkt_size = packet->hdrlen_ + packet->datalen();
@@ -77,10 +78,10 @@ void hierarchicalQueue::enque(Packet* packet) {
     //int flowId = iph->flowid();
     //int insertLevel = flows[flowId].getInsertLevel();
 
-    tuple<int, int> key = make_tuple(iph->saddr, iph->daddr);
+    tuple<int, int> key = std::make_tuple(iph->saddr, iph->daddr);
     // Not find the current key
     if (flowMap.find(key) == flowMap.end()) {
-        flowMap[key] = Flow(iph->saddr, iph->daddr, 2, 100);
+        flowMap[key] = Flow_pl(iph->saddr, iph->daddr, 2, 100);
     }
 
     int insertLevel = flowMap[key].getInsertLevel();
@@ -195,7 +196,7 @@ void hierarchicalQueue::enque(Packet* packet) {
 }
 
 // Peixuan: This can be replaced by any other algorithms
-int hierarchicalQueue::cal_theory_departure_round(hdr_ip* iph, int pkt_size) {
+int hierarchicalQueue_pl::cal_theory_departure_round(hdr_ip* iph, int pkt_size) {
     //int       fid_;   /* flow id */
     //int       prio_;
     // parameters in iph
@@ -210,7 +211,7 @@ int hierarchicalQueue::cal_theory_departure_round(hdr_ip* iph, int pkt_size) {
     //int curFlowID = iph->flowid();   // use flow id as flow id
     //float curWeight = flows[curFlowID].getWeight();
 
-    tuple<int, int> curKey = make_tuple(iph->saddr, iph->daddr);
+    tuple<int, int> curKey = std::make_tuple(iph->saddr, iph->daddr);
     float curWeight = flowMap[curKey].getWeight();
 
 
@@ -235,7 +236,7 @@ int hierarchicalQueue::cal_theory_departure_round(hdr_ip* iph, int pkt_size) {
 
 //06262019 Static getting all the departure packet in this virtual clock unit (JUST FOR SIMULATION PURPUSE!)
 
-Packet* hierarchicalQueue::deque() {
+Packet* hierarchicalQueue_pl::deque() {
 
     fprintf(stderr, "Start Dequeue\n"); // Debug: Peixuan 07062019
 
@@ -300,7 +301,7 @@ Packet* hierarchicalQueue::deque() {
 }
 
 // Peixuan: now we only call this function to get the departure packet in the next round
-vector<Packet*> hierarchicalQueue::runRound() {
+vector<Packet*> hierarchicalQueue_pl::runRound() {
 
     fprintf(stderr, "Run Round\n"); // Debug: Peixuan 07062019
 
@@ -476,7 +477,7 @@ vector<Packet*> hierarchicalQueue::runRound() {
 
 //Peixuan: This is also used to get the packet served in this round (VC unit)
 // We need to adjust the order of serving: level0 -> level1 -> level2
-vector<Packet*> hierarchicalQueue::serveUpperLevel(int currentRound) {
+vector<Packet*> hierarchicalQueue_pl::serveUpperLevel(int currentRound) {
 
     fprintf(stderr, "Serving Upper Level\n"); // Debug: Peixuan 07062019
 

@@ -9,12 +9,14 @@
 #include "queue.h"
 #include "address.h"
 #include <tuple>
+#include <functional>
+
 using namespace std;
 
-class Flow {
+class Flow_pl {
 private:
     // int flowId;
-    tuple<int, int> key;
+    std::tuple<int, int> key;
     float weight;
     int brustness; // 07102019 Peixuan: control flow brustness level
     static const int DEFAULT_BRUSTNESS = 1000;  // 07102019 Peixuan: control flow brustness level
@@ -22,8 +24,8 @@ private:
     int lastDepartureRound;
     int insertLevel;
 public:
-    Flow(int id, float weight);
-    Flow(int id, float weight, int brustness); // 07102019 Peixuan: control flow brustness level
+    Flow_pl(int saddr, int daddr, float weight);
+    Flow_pl(int saddr, int daddr, float weight, int brustness); // 07102019 Peixuan: control flow brustness level
 
     float getWeight() const;
     int getBrustness() const; // 07102019 Peixuan: control flow brustness level
