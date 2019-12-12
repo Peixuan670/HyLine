@@ -27,7 +27,15 @@ private:
 
     //vector<Flow> flows;
     //map<tuple<int, int>, Flow_pl> flowMap;
-    map<std::pair<int, int>, Flow_pl> flowMap;
+
+    //12122019 Peixuan: 
+    typedef std::map<std::pair<int, int>, Flow_pl> FlowMap;
+    FlowMap flowMap;
+    //map<std::pair<int, int>, Flow_pl> flowMap;
+    //FlowMap::const_iterator iter = flowMap.find(name);
+
+
+
     //06262019 Peixuan
     vector<Packet*> pktCurRound;
 

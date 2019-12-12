@@ -35,8 +35,9 @@ hierarchicalQueue_pl::hierarchicalQueue_pl(int volume) {
     //pktCurRound = new vector<Packet*>;
 }
 
-Flow_pl hierarchicalQueue_pl::getFlow(tuple<int, int> key) {
+Flow_pl hierarchicalQueue_pl::getFlow(std::map<int, int> key) {
     return flowMap[key];
+    //FlowMap::const_iterator iter = flowMap.find(key);
 }
 
 void hierarchicalQueue_pl::setCurrentRound(int currentRound) {
@@ -78,7 +79,7 @@ void hierarchicalQueue_pl::enque(Packet* packet) {
     //int flowId = iph->flowid();
     //int insertLevel = flows[flowId].getInsertLevel();
 
-    tuple<int, int> key = std::make_tuple(iph->saddr, iph->daddr);
+    std::pair<int, int> key = std::make_pair(iph->saddr, iph->daddr);
     // Not find the current key
     if (flowMap.find(key) == flowMap.end()) {
         flowMap[key] = Flow_pl(iph->saddr, iph->daddr, 2, 100);
@@ -211,7 +212,7 @@ int hierarchicalQueue_pl::cal_theory_departure_round(hdr_ip* iph, int pkt_size) 
     //int curFlowID = iph->flowid();   // use flow id as flow id
     //float curWeight = flows[curFlowID].getWeight();
 
-    tuple<int, int> curKey = std::make_tuple(iph->saddr, iph->daddr);
+    std::pair<int, int> curKey = std::make_pair(iph->saddr, iph->daddr);
     float curWeight = flowMap[curKey].getWeight();
 
 
