@@ -2,7 +2,7 @@
 #include "Flow_pl.h"
 #include <vector>
 #include <map>
-#include <tuple>
+//#include <tuple>
 #include <functional>
 using namespace std;
 
@@ -26,7 +26,8 @@ private:
     bool level1ServingB;          // is serve Back up Levels
 
     //vector<Flow> flows;
-    map<tuple<int, int>, Flow_pl> flowMap;
+    //map<tuple<int, int>, Flow_pl> flowMap;
+    map<std::pair<int, int>, Flow_pl> flowMap;
     //06262019 Peixuan
     vector<Packet*> pktCurRound;
 

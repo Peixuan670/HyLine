@@ -8,15 +8,17 @@
 // will be used in package-send function
 #include "queue.h"
 #include "address.h"
-#include <tuple>
+//#include <tuple>
 #include <functional>
+#include <utility>
 
 using namespace std;
 
 class Flow_pl {
 private:
     // int flowId;
-    std::tuple<int, int> key;
+    //std::tuple<int, int> key;
+    std::pair<int,int> key;
     float weight;
     int brustness; // 07102019 Peixuan: control flow brustness level
     static const int DEFAULT_BRUSTNESS = 1000;  // 07102019 Peixuan: control flow brustness level

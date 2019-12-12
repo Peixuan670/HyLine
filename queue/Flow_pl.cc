@@ -7,7 +7,8 @@
 
 Flow_pl::Flow_pl(int saddr, int daddr, float weight) {
     //this->key = std::make_tuple(saddr, daddr);
-    this->key = make_tuple(saddr, daddr);
+    //this->key = make_tuple(saddr, daddr);
+    this->key = make_pair(saddr, daddr);
     this->weight = weight;
     this->brustness = DEFAULT_BRUSTNESS;
     this->insertLevel = 0;
@@ -16,7 +17,8 @@ Flow_pl::Flow_pl(int saddr, int daddr, float weight) {
 
 Flow_pl::Flow_pl(int saddr, int daddr, float weight, int brustness) {
     //this->key = std::make_tuple(saddr, daddr);
-    this->key = make_tuple(saddr, daddr);
+    //this->key = make_tuple(saddr, daddr);
+    this->key = make_pair(saddr, daddr);
     this->weight = weight;
     this->brustness = brustness;
     this->insertLevel = 0;
