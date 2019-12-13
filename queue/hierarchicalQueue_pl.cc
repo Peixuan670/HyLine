@@ -1,10 +1,11 @@
 #include <cmath>
 
 #include "hierarchicalQueue_pl.h"
+//#include <tuple>
 
 static class hierarchicalQueue_plClass : public TclClass {
 public:
-        hierarchicalQueue_plClass() : TclClass("Queue/HRCC") {}
+        hierarchicalQueue_plClass() : TclClass("Queue/HRCCPL") {}
         TclObject* create(int, const char*const*) {
             fprintf(stderr, "Created new TCL HCS instance\n"); // Debug: Peixuan 07062019
             return (new hierarchicalQueue_pl);
@@ -32,6 +33,12 @@ hierarchicalQueue_pl::hierarchicalQueue_pl(int volume) {
     currentRound = 0;
     pktCount = 0; // 07072019 Peixuan
     //pktCurRound = new vector<Packet*>;
+}
+
+Flow_pl hierarchicalQueue_pl::getFlow(std::pair<int, int> key) {
+    // return flowMap[key];
+    FlowMap::const_iterator iter = flowMap.find(key);
+    return iter->second;
 }
 
 void hierarchicalQueue_pl::setCurrentRound(int currentRound) {
@@ -73,10 +80,12 @@ void hierarchicalQueue_pl::enque(Packet* packet) {
     //int flowId = iph->flowid();
     //int insertLevel = flows[flowId].getInsertLevel();
 
-    vector<int> key = {iph->saddr, iph->daddr};
+    std::pair<int, int> key = std::make_pair(iph->saddr, iph->daddr);
     // Not find the current key
     if (flowMap.find(key) == flowMap.end()) {
-        flowMap[key] = Flow_pl(iph->saddr, iph->daddr, 2, 100);
+        //flowMap[key] = Flow_pl(iph->saddr, iph->daddr, 2, 100);
+        FlowMap::const_iterator iter = flowMap.find(key);
+        return iter->second = Flow_pl(iph->saddr, iph->daddr, 2, 100);
     }
 
     int insertLevel = flowMap[key].getInsertLevel();
@@ -206,12 +215,15 @@ int hierarchicalQueue_pl::cal_theory_departure_round(hdr_ip* iph, int pkt_size) 
     //int curFlowID = iph->flowid();   // use flow id as flow id
     //float curWeight = flows[curFlowID].getWeight();
 
-    vector<int> curKey = {iph->saddr, iph->daddr};
-    float curWeight = flowMap[curKey].getWeight();
+    //std::pair<int, int> curKey = std::make_pair(iph->saddr, iph->daddr);
+    //std::pair<int, int> curKey = std::make_pair(iph->saddr, iph->daddr);
+    //float curWeight = flowMap[curKey].getWeight();
+    float curWeight = this->getFlow(iph->saddr, iph->daddr).getWeight(); //Peixuan12122019
 
 
 
-    int curLastDepartureRound = flowMap[curKey].getLastDepartureRound();
+    //int curLastDepartureRound = flowMap[curKey].getLastDepartureRound();
+    int curLastDepartureRound = this->getFlow(iph->saddr, iph->daddr).getLastDepartureRound(); //Peixuan12122019
     int curStartRound = max(currentRound, curLastDepartureRound);
 
     fprintf(stderr, "$$$$$Last Departure Round of Flow%d = %d\n",iph->saddr() , curLastDepartureRound); // Debug: Peixuan 07062019
@@ -652,6 +664,13 @@ vector<Packet*> hierarchicalQueue_pl::serveUpperLevel(int currentRound) {
    
 
     return result;
+}
+
+// Peixuan 12122019
+Flow_pl hierarchicalQueue_pl::getFlow(int saddr, int daddr) {
+    std::pair<int, int> key = std::make_pair(saddr, daddr);
+    FlowMap::const_iterator iter = flowMap.find(key);
+    return iter->second;
 }
 
 

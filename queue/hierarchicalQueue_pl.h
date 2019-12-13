@@ -2,6 +2,7 @@
 #include "Flow_pl.h"
 #include <vector>
 #include <map>
+#include <utility>
 //#include <tuple>
 #include <functional>
 using namespace std;
@@ -34,7 +35,8 @@ private:
     //map<std::pair<int, int>, Flow_pl> flowMap;
     //FlowMap::const_iterator iter = flowMap.find(name);
 
-
+    //12122019 Peixuan:
+    Flow_pl getFlow(int saddr, int daddr);
 
     //06262019 Peixuan
     vector<Packet*> pktCurRound;
@@ -45,7 +47,7 @@ private:
     void setPktCount(int);
 public:
     hierarchicalQueue_pl();
-    Flow_pl getFlow();
+    Flow_pl getFlow(std::pair<int, int>);
     explicit hierarchicalQueue_pl(int);
     void enque(Packet*);
     Packet* deque();
