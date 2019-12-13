@@ -8,11 +8,17 @@
 // will be used in package-send function
 #include "queue.h"
 #include "address.h"
+//#include <tuple>
+#include <functional>
+#include <utility>
+
 using namespace std;
 
 class Flow_pl {
 private:
-    int flowId;
+    // int flowId;
+    //std::tuple<int, int> key;
+    std::pair<int,int> key;
     float weight;
     int brustness; // 07102019 Peixuan: control flow brustness level
     static const int DEFAULT_BRUSTNESS = 1000;  // 07102019 Peixuan: control flow brustness level
@@ -20,8 +26,8 @@ private:
     int lastDepartureRound;
     int insertLevel;
 public:
-    Flow_pl(int id, float weight);
-    Flow_pl(int id, float weight, int brustness); // 07102019 Peixuan: control flow brustness level
+    Flow_pl(int saddr, int daddr, float weight);
+    Flow_pl(int saddr, int daddr, float weight, int brustness); // 07102019 Peixuan: control flow brustness level
 
     float getWeight() const;
     int getBrustness() const; // 07102019 Peixuan: control flow brustness level

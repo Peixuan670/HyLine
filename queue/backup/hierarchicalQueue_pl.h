@@ -1,7 +1,10 @@
 #include "Level.h"
 #include "Flow_pl.h"
 #include <vector>
-
+#include <map>
+#include <utility>
+//#include <tuple>
+#include <functional>
 using namespace std;
 
 class hierarchicalQueue_pl : public Queue {
@@ -23,7 +26,18 @@ private:
     bool level0ServingB;          // is serve Back up Levels
     bool level1ServingB;          // is serve Back up Levels
 
-    vector<Flow_pl> flows;
+    //vector<Flow> flows;
+    //map<tuple<int, int>, Flow_pl> flowMap;
+
+    //12122019 Peixuan: 
+    typedef std::map<std::pair<int, int>, Flow_pl> FlowMap;
+    FlowMap flowMap;
+    //map<std::pair<int, int>, Flow_pl> flowMap;
+    //FlowMap::const_iterator iter = flowMap.find(name);
+
+    //12122019 Peixuan:
+    Flow_pl getFlow(int saddr, int daddr);
+
     //06262019 Peixuan
     vector<Packet*> pktCurRound;
 
@@ -33,6 +47,7 @@ private:
     void setPktCount(int);
 public:
     hierarchicalQueue_pl();
+    Flow_pl getFlow(std::pair<int, int>);
     explicit hierarchicalQueue_pl(int);
     void enque(Packet*);
     Packet* deque();

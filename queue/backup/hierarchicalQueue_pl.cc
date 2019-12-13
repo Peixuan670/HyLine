@@ -1,14 +1,15 @@
 #include <cmath>
 
 #include "hierarchicalQueue_pl.h"
+//#include <tuple>
 
 static class hierarchicalQueue_plClass : public TclClass {
 public:
         hierarchicalQueue_plClass() : TclClass("Queue/HRCCPL") {}
         TclObject* create(int, const char*const*) {
             fprintf(stderr, "Created new TCL HCS instance\n"); // Debug: Peixuan 07062019
-	        return (new hierarchicalQueue_pl);
-	}
+            return (new hierarchicalQueue_pl);
+    }
 } class_hierarchical_queue;
 
 hierarchicalQueue_pl::hierarchicalQueue_pl():hierarchicalQueue_pl(DEFAULT_VOLUME) {
@@ -18,18 +19,26 @@ hierarchicalQueue_pl::hierarchicalQueue_pl():hierarchicalQueue_pl(DEFAULT_VOLUME
 hierarchicalQueue_pl::hierarchicalQueue_pl(int volume) {
     fprintf(stderr, "Created new HCS instance with volumn = %d\n", volume); // Debug: Peixuan 07062019
     this->volume = volume;
-    flows.push_back(Flow_pl(0, 2, 100));
-    flows.push_back(Flow_pl(1, 2, 100));
-    flows.push_back(Flow_pl(2, 2, 100));
-    flows.push_back(Flow_pl(3, 2, 100));
-    flows.push_back(Flow_pl(4, 20, 1000));        //07062019: Peixuan adding more flows for strange flow 3 problem
-    flows.push_back(Flow_pl(5, 20, 1000));        //07062019: Peixuan adding more flows for strange flow 3 problem
-    flows.push_back(Flow_pl(6, 200, 1000));        //07062019: Peixuan adding more flows for strange flow 3 problem
+    // tuple<int, int> key = make_tuple(iph->saddr, iph->daddr);
+    // flowMap[key] = Flow(0, 2, 100);
+    //flows.push_back(Flow(0, 2, 100));
+    //flows.push_back(Flow(1, 2, 100));
+    //flows.push_back(Flow(2, 2, 100));
+    //flows.push_back(Flow(3, 2, 100));
+    //flows.push_back(Flow(4, 20, 1000));        //07062019: Peixuan adding more flows for strange flow 3 problem
+    //flows.push_back(Flow(5, 20, 1000));        //07062019: Peixuan adding more flows for strange flow 3 problem
+    //flows.push_back(Flow(6, 200, 1000));        //07062019: Peixuan adding more flows for strange flow 3 problem
     //flows.push_back(Flow(1, 0.2));
     // Flow(1, 0.2), Flow(2, 0.3)};
     currentRound = 0;
     pktCount = 0; // 07072019 Peixuan
     //pktCurRound = new vector<Packet*>;
+}
+
+Flow_pl hierarchicalQueue_pl::getFlow(std::pair<int, int> key) {
+    // return flowMap[key];
+    FlowMap::const_iterator iter = flowMap.find(key);
+    return iter->second;
 }
 
 void hierarchicalQueue_pl::setCurrentRound(int currentRound) {
@@ -66,8 +75,20 @@ void hierarchicalQueue_pl::enque(Packet* packet) {
     /* With departureRound and currentRound, we can get the insertLevel, insertLevel is a parameter of flow and we can set and read this variable.
     */
 
-    int flowId = iph->flowid();
-    int insertLevel = flows[flowId].getInsertLevel();
+    
+
+    //int flowId = iph->flowid();
+    //int insertLevel = flows[flowId].getInsertLevel();
+
+    std::pair<int, int> key = std::make_pair(iph->saddr, iph->daddr);
+    // Not find the current key
+    if (flowMap.find(key) == flowMap.end()) {
+        //flowMap[key] = Flow_pl(iph->saddr, iph->daddr, 2, 100);
+        FlowMap::const_iterator iter = flowMap.find(key);
+        return iter->second = Flow_pl(iph->saddr, iph->daddr, 2, 100);
+    }
+
+    int insertLevel = flowMap[key].getInsertLevel();
 
     departureRound = max(departureRound, currentRound);
 
@@ -78,15 +99,16 @@ void hierarchicalQueue_pl::enque(Packet* packet) {
     }
 
     
-    int curFlowID = iph->saddr();   // use source IP as flow id
-    int curBrustness = flows[curFlowID].getBrustness();
+    // int curFlowID = iph->saddr();   // use source IP as flow id
+    int curBrustness = flowMap[key].getBrustness();
     if ((departureRound - currentRound) >= curBrustness) {
         fprintf(stderr, "?????Exceeds maximum brustness, drop the packet from Flow %d\n", iph->saddr()); // Debug: Peixuan 07072019
         drop(packet);
         return;   // 07102019 Peixuan: exceeds the maximum brustness
     }
 
-    flows[curFlowID].setLastDepartureRound(departureRound);     // 07102019 Peixuan: only update last packet finish time if the packet wasn't dropped
+    //flows[curFlowID].setLastDepartureRound(departureRound);     // 07102019 Peixuan: only update last packet finish time if the packet wasn't dropped
+    flowMap[key].setLastDepartureRound(departureRound);
 
     fprintf(stderr, "At Round: %d, Enqueue Packet from Flow %d with Finish time = %d.\n", currentRound, iph->saddr(), departureRound); // Debug: Peixuan 07072019
     
@@ -123,11 +145,11 @@ void hierarchicalQueue_pl::enque(Packet* packet) {
     if (departureRound / 100 - currentRound / 100 > 1 || insertLevel == 2) {
         //fprintf(stderr, "Enqueue Level 2\n"); // Debug: Peixuan 07072019
         if (departureRound / 100 % 10 == 5) {
-            flows[flowId].setInsertLevel(1);
+            flowMap[key].setInsertLevel(1);
             hundredLevel.enque(packet, departureRound / 10 % 10);
             fprintf(stderr, "Enqueue Level 2, hundred FIFO, fifo %d\n", departureRound / 10 % 10); // Debug: Peixuan 07072019
         } else {
-            flows[flowId].setInsertLevel(2);
+            flowMap[key].setInsertLevel(2);
             levels[2].enque(packet, departureRound / 100 % 10);
             fprintf(stderr, "Enqueue Level 2, regular FIFO, fifo %d\n", departureRound / 100 % 10); // Debug: Peixuan 07072019
         }
@@ -135,22 +157,22 @@ void hierarchicalQueue_pl::enque(Packet* packet) {
         if (!level1InsertingB) {
             //fprintf(stderr, "Enqueue Level 1\n"); // Debug: Peixuan 07072019
             if (departureRound / 10 % 10 == 5) {
-                flows[flowId].setInsertLevel(0);
+                flowMap[key].setInsertLevel(0);
                 decadeLevel.enque(packet, departureRound  % 10);
                 fprintf(stderr, "Enqueue Level 1, decede FIFO, fifo %d\n", departureRound  % 10); // Debug: Peixuan 07072019
             } else {
-                flows[flowId].setInsertLevel(1);
+                flowMap[key].setInsertLevel(1);
                 levels[1].enque(packet, departureRound / 10 % 10);
                 fprintf(stderr, "Enqueue Level 1, regular FIFO, fifo %d\n", departureRound / 10 % 10); // Debug: Peixuan 07072019
             }
         } else {
             //fprintf(stderr, "Enqueue Level B 1\n"); // Debug: Peixuan 07072019
             if (departureRound / 10 % 10 == 5) {
-                flows[flowId].setInsertLevel(0);
+                flowMap[key].setInsertLevel(0);
                 decadeLevelB.enque(packet, departureRound  % 10);
                 fprintf(stderr, "Enqueue Level B 1, decede FIFO, fifo %d\n", departureRound  % 10); // Debug: Peixuan 07072019
             } else {
-                flows[flowId].setInsertLevel(1);
+                flowMap[key].setInsertLevel(1);
                 levelsB[1].enque(packet, departureRound / 10 % 10);
                 fprintf(stderr, "Enqueue Level B 1, regular FIFO, fifo %d\n", departureRound / 10 % 10); // Debug: Peixuan 07072019
             }
@@ -159,12 +181,12 @@ void hierarchicalQueue_pl::enque(Packet* packet) {
     } else {
         if (!level0InsertingB) {
             //fprintf(stderr, "Enqueue Level 0\n"); // Debug: Peixuan 07072019
-            flows[flowId].setInsertLevel(0);
+            flowMap[key].setInsertLevel(0);
             levels[0].enque(packet, departureRound % 10);
             fprintf(stderr, "Enqueue Level 0, regular FIFO, fifo %d\n", departureRound % 10); // Debug: Peixuan 07072019
         } else {
             //fprintf(stderr, "Enqueue Level B 0\n"); // Debug: Peixuan 07072019
-            flows[flowId].setInsertLevel(0);
+            flowMap[key].setInsertLevel(0);
             levelsB[0].enque(packet, departureRound % 10);
             fprintf(stderr, "Enqueue Level B 0, regular FIFO, fifo %d\n", departureRound % 10); // Debug: Peixuan 07072019
         }
@@ -179,8 +201,8 @@ void hierarchicalQueue_pl::enque(Packet* packet) {
 
 // Peixuan: This can be replaced by any other algorithms
 int hierarchicalQueue_pl::cal_theory_departure_round(hdr_ip* iph, int pkt_size) {
-    //int		fid_;	/* flow id */
-    //int		prio_;
+    //int       fid_;   /* flow id */
+    //int       prio_;
     // parameters in iph
     // TODO
 
@@ -190,9 +212,18 @@ int hierarchicalQueue_pl::cal_theory_departure_round(hdr_ip* iph, int pkt_size) 
     fprintf(stderr, "$$$$$Calculate Departure Round at VC = %d\n", currentRound); // Debug: Peixuan 07062019
 
     //int curFlowID = iph->saddr();   // use source IP as flow id
-    int curFlowID = iph->flowid();   // use flow id as flow id
-    float curWeight = flows[curFlowID].getWeight();
-    int curLastDepartureRound = flows[curFlowID].getLastDepartureRound();
+    //int curFlowID = iph->flowid();   // use flow id as flow id
+    //float curWeight = flows[curFlowID].getWeight();
+
+    //std::pair<int, int> curKey = std::make_pair(iph->saddr, iph->daddr);
+    //std::pair<int, int> curKey = std::make_pair(iph->saddr, iph->daddr);
+    //float curWeight = flowMap[curKey].getWeight();
+    float curWeight = this->getFlow(iph->saddr, iph->daddr).getWeight(); //Peixuan12122019
+
+
+
+    //int curLastDepartureRound = flowMap[curKey].getLastDepartureRound();
+    int curLastDepartureRound = this->getFlow(iph->saddr, iph->daddr).getLastDepartureRound(); //Peixuan12122019
     int curStartRound = max(currentRound, curLastDepartureRound);
 
     fprintf(stderr, "$$$$$Last Departure Round of Flow%d = %d\n",iph->saddr() , curLastDepartureRound); // Debug: Peixuan 07062019
@@ -633,6 +664,13 @@ vector<Packet*> hierarchicalQueue_pl::serveUpperLevel(int currentRound) {
    
 
     return result;
+}
+
+// Peixuan 12122019
+Flow_pl hierarchicalQueue_pl::getFlow(int saddr, int daddr) {
+    std::pair<int, int> key = std::make_pair(saddr, daddr);
+    FlowMap::const_iterator iter = flowMap.find(key);
+    return iter->second;
 }
 
 

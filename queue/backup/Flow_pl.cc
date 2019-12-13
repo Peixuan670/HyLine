@@ -3,17 +3,22 @@
 //
 
 #include "Flow_pl.h"
+//#include <tuple>
 
-Flow_pl::Flow_pl(int id, float weight) {
-    this->flowId = id;
+Flow_pl::Flow_pl(int saddr, int daddr, float weight) {
+    //this->key = std::make_tuple(saddr, daddr);
+    //this->key = make_tuple(saddr, daddr);
+    this->key = make_pair(saddr, daddr);
     this->weight = weight;
     this->brustness = DEFAULT_BRUSTNESS;
     this->insertLevel = 0;
     this->lastDepartureRound = 0;
 }
 
-Flow_pl::Flow_pl(int id, float weight, int brustness) {
-    this->flowId = id;
+Flow_pl::Flow_pl(int saddr, int daddr, float weight, int brustness) {
+    //this->key = std::make_tuple(saddr, daddr);
+    //this->key = make_tuple(saddr, daddr);
+    this->key = make_pair(saddr, daddr);
     this->weight = weight;
     this->brustness = brustness;
     this->insertLevel = 0;
