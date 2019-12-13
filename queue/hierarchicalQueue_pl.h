@@ -1,6 +1,7 @@
 #include "Level.h"
 #include "Flow_pl.h"
 #include <vector>
+#include <string>
 
 #include <map>
 
@@ -36,16 +37,18 @@ private:
 
     //12132019 Peixuan
     //typedef std::map<int, Flow_pl*> FlowTable;
-    typedef std::map<pair<ns_addr_t, ns_addr_t>, Flow_pl*> FlowMap;
+    typedef std::map<string, Flow_pl*> FlowMap;
     FlowMap flowMap;
 
-    typedef std::map<int, int> TestIntMap;
-    TestIntMap testIntMap;
+    //typedef std::map<int, Flow_pl*> TestIntMap;
+    //TestIntMap testIntMap;
 
     //12132019 Peixuan
-    //Flow_pl* getFlowPtr(ns_addr_t saddr, ns_addr_t daddr);
-    int getFlowPtr(ns_addr_t saddr, ns_addr_t daddr);
+    Flow_pl* getFlowPtr(ns_addr_t saddr, ns_addr_t daddr);
+    //int getFlowPtr(ns_addr_t saddr, ns_addr_t daddr);
     int insertNewFlowPtr(ns_addr_t saddr, ns_addr_t daddr, int weight, int brustness);
+
+    string convertKeyValue(ns_addr_t saddr, ns_addr_t daddr);
 
 
 public:

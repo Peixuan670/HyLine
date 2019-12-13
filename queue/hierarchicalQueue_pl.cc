@@ -31,11 +31,11 @@ hierarchicalQueue_pl::hierarchicalQueue_pl(int volume) {
     pktCount = 0; // 07072019 Peixuan
     //pktCurRound = new vector<Packet*>;
     //12132019 Peixuan
-    typedef std::map<pair<ns_addr_t, ns_addr_t>, Flow_pl*> FlowMap;
+    typedef std::map<string, Flow_pl*> FlowMap;
     FlowMap flowMap;
 
-    typedef std::map<int, int> TestIntMap;
-    TestIntMap testIntMap;
+    //typedef std::map<int, int> TestIntMap;
+    //TestIntMap testIntMap;
 }
 
 void hierarchicalQueue_pl::setCurrentRound(int currentRound) {
@@ -643,9 +643,9 @@ vector<Packet*> hierarchicalQueue_pl::serveUpperLevel(int currentRound) {
 
 
 // 12132019 Peixuan
-//Flow_pl* hierarchicalQueue_pl::getFlowPtr(ns_addr_t saddr, ns_addr_t daddr) {
-int hierarchicalQueue_pl::getFlowPtr(ns_addr_t saddr, ns_addr_t daddr) {
-    pair<ns_addr_t, ns_addr_t> key = make_pair(saddr, daddr);
+Flow_pl* hierarchicalQueue_pl::getFlowPtr(ns_addr_t saddr, ns_addr_t daddr) {
+//int hierarchicalQueue_pl::getFlowPtr(ns_addr_t saddr, ns_addr_t daddr) {
+    //pair<ns_addr_t, ns_addr_t> key = make_pair(saddr, daddr);
     //FlowMap::const_iterator iter; 
     //iter = this->flowMap.find(make_pair<ns_addr_t, ns_addr_t>);
     //typedef std::map<pair<ns_addr_t, ns_addr_t>, Flow_pl*> FlowMap;
@@ -653,17 +653,24 @@ int hierarchicalQueue_pl::getFlowPtr(ns_addr_t saddr, ns_addr_t daddr) {
     //return iter->second;
     //return this->flowMap[key];
     //Flow_pl* flow = this->flowMap[key];
-    printf("Map size: %d",this->flowMap.size());
-    return 0;
+    //printf("Map size: %d",this->flowMap.size());
+    string key = convertKeyValue(saddr, daddr);
+    Flow_pl* flow = this->flowMap[key];
+    return flow;
 }
 
 int hierarchicalQueue_pl::insertNewFlowPtr(ns_addr_t saddr, ns_addr_t daddr, int weight, int brustness) {
-    pair<ns_addr_t, ns_addr_t> key = make_pair(saddr, daddr);
-    Flow_pl* newFlowPtr = new Flow_pl(1, 2, 100);
+    //pair<ns_addr_t, ns_addr_t> key = make_pair(saddr, daddr);
+    string key = convertKeyValue(saddr, daddr);
+    Flow_pl* newFlowPtr = new Flow_pl(1, weight, brustness);
     //this->flowMap.insert(pair<pair<ns_addr_t, ns_addr_t>, Flow_pl*>(key, newFlowPtr));
-    this->testIntMap.insert(pair<int, int>(0, 0));
+    this->flowMap.insert(pair<string, Flow_pl*>(key, newFlowPtr));
     //flowMap.insert(pair(key, newFlowPtr));
     return 0;
+}
+
+string hierarchicalQueue_pl::convertKeyValue(ns_addr_t saddr, ns_addr_t daddr) {
+    return "Key"; //TODO:implement this logic
 }
 
 

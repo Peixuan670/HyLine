@@ -13,6 +13,7 @@ using namespace std;
 class Flow_pl {
 private:
     int flowId;
+    //string flowId;
     float weight;
     int brustness; // 07102019 Peixuan: control flow brustness level
     static const int DEFAULT_BRUSTNESS = 1000;  // 07102019 Peixuan: control flow brustness level
