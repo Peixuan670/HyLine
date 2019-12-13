@@ -5,7 +5,7 @@
 #include "Flow_pl.h"
 //#include <tuple>
 
-Flow_pl::Flow_pl(int saddr, int daddr, float weight) {
+Flow_pl::Flow_pl(nsaddr_t saddr, nsaddr_t daddr, float weight) {
     //this->key = std::make_tuple(saddr, daddr);
     //this->key = make_tuple(saddr, daddr);
     this->key = make_pair(saddr, daddr);
@@ -15,7 +15,7 @@ Flow_pl::Flow_pl(int saddr, int daddr, float weight) {
     this->lastDepartureRound = 0;
 }
 
-Flow_pl::Flow_pl(int saddr, int daddr, float weight, int brustness) {
+Flow_pl::Flow_pl(nsaddr_t saddr, nsaddr_t daddr, float weight, int brustness) {
     //this->key = std::make_tuple(saddr, daddr);
     //this->key = make_tuple(saddr, daddr);
     this->key = make_pair(saddr, daddr);

@@ -80,7 +80,7 @@ void hierarchicalQueue_pl::enque(Packet* packet) {
     //int flowId = iph->flowid();
     //int insertLevel = flows[flowId].getInsertLevel();
 
-    std::pair<int, int> key = std::make_pair(iph->saddr, iph->daddr);
+    std::pair<nsaddr_t, nsaddr_t> key = std::make_pair(iph->saddr, iph->daddr);
     // Not find the current key
     if (flowMap.find(key) == flowMap.end()) {
         //flowMap[key] = Flow_pl(iph->saddr, iph->daddr, 2, 100);
@@ -667,8 +667,8 @@ vector<Packet*> hierarchicalQueue_pl::serveUpperLevel(int currentRound) {
 }
 
 // Peixuan 12122019
-Flow_pl hierarchicalQueue_pl::getFlow(int saddr, int daddr) {
-    std::pair<int, int> key = std::make_pair(saddr, daddr);
+Flow_pl hierarchicalQueue_pl::getFlow(nsaddr_t saddr, nsaddr_t daddr) {
+    std::pair<nsaddr_t, nsaddr_t> key = std::make_pair(saddr, daddr);
     FlowMap::const_iterator iter = flowMap.find(key);
     return iter->second;
 }

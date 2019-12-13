@@ -26,8 +26,8 @@ private:
     int lastDepartureRound;
     int insertLevel;
 public:
-    Flow_pl(int saddr, int daddr, float weight);
-    Flow_pl(int saddr, int daddr, float weight, int brustness); // 07102019 Peixuan: control flow brustness level
+    Flow_pl(nsaddr_t saddr, nsaddr_t daddr, float weight);
+    Flow_pl(nsaddr_t saddr, nsaddr_t daddr, float weight, int brustness); // 07102019 Peixuan: control flow brustness level
 
     float getWeight() const;
     int getBrustness() const; // 07102019 Peixuan: control flow brustness level
