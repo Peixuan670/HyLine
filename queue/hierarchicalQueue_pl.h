@@ -2,6 +2,8 @@
 #include "Flow_pl.h"
 #include <vector>
 
+#include <map>
+
 using namespace std;
 
 class hierarchicalQueue_pl : public Queue {
@@ -31,6 +33,21 @@ private:
     vector<Packet*> runRound();
     vector<Packet*> serveUpperLevel(int);
     void setPktCount(int);
+
+    //12132019 Peixuan
+    //typedef std::map<int, Flow_pl*> FlowTable;
+    typedef std::map<pair<ns_addr_t, ns_addr_t>, Flow_pl*> FlowMap;
+    FlowMap flowMap;
+
+    typedef std::map<int, int> TestIntMap;
+    TestIntMap testIntMap;
+
+    //12132019 Peixuan
+    //Flow_pl* getFlowPtr(ns_addr_t saddr, ns_addr_t daddr);
+    int getFlowPtr(ns_addr_t saddr, ns_addr_t daddr);
+    int insertNewFlowPtr(ns_addr_t saddr, ns_addr_t daddr, int weight, int brustness);
+
+
 public:
     hierarchicalQueue_pl();
     explicit hierarchicalQueue_pl(int);
@@ -41,4 +58,7 @@ public:
     int cal_insert_level(int, int);
     // Packet* serveCycle();
     // vector<Packet> serveUpperLevel(int &, int);
+
+    
+
 };

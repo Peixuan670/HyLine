@@ -30,6 +30,12 @@ hierarchicalQueue_pl::hierarchicalQueue_pl(int volume) {
     currentRound = 0;
     pktCount = 0; // 07072019 Peixuan
     //pktCurRound = new vector<Packet*>;
+    //12132019 Peixuan
+    typedef std::map<pair<ns_addr_t, ns_addr_t>, Flow_pl*> FlowMap;
+    FlowMap flowMap;
+
+    typedef std::map<int, int> TestIntMap;
+    TestIntMap testIntMap;
 }
 
 void hierarchicalQueue_pl::setCurrentRound(int currentRound) {
@@ -634,6 +640,32 @@ vector<Packet*> hierarchicalQueue_pl::serveUpperLevel(int currentRound) {
 
     return result;
 }
+
+
+// 12132019 Peixuan
+//Flow_pl* hierarchicalQueue_pl::getFlowPtr(ns_addr_t saddr, ns_addr_t daddr) {
+int hierarchicalQueue_pl::getFlowPtr(ns_addr_t saddr, ns_addr_t daddr) {
+    pair<ns_addr_t, ns_addr_t> key = make_pair(saddr, daddr);
+    //FlowMap::const_iterator iter; 
+    //iter = this->flowMap.find(make_pair<ns_addr_t, ns_addr_t>);
+    //typedef std::map<pair<ns_addr_t, ns_addr_t>, Flow_pl*> FlowMap;
+    //FlowMap::const_iterator iter = this->flowMap.find(key);
+    //return iter->second;
+    //return this->flowMap[key];
+    //Flow_pl* flow = this->flowMap[key];
+    printf("Map size: %d",this->flowMap.size());
+    return 0;
+}
+
+int hierarchicalQueue_pl::insertNewFlowPtr(ns_addr_t saddr, ns_addr_t daddr, int weight, int brustness) {
+    pair<ns_addr_t, ns_addr_t> key = make_pair(saddr, daddr);
+    Flow_pl* newFlowPtr = new Flow_pl(1, 2, 100);
+    //this->flowMap.insert(pair<pair<ns_addr_t, ns_addr_t>, Flow_pl*>(key, newFlowPtr));
+    this->testIntMap.insert(pair<int, int>(0, 0));
+    //flowMap.insert(pair(key, newFlowPtr));
+    return 0;
+}
+
 
 
 // This is the trail to implement the real logic
