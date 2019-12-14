@@ -7,7 +7,7 @@ static class hierarchicalQueue_plClass : public TclClass {
 public:
         hierarchicalQueue_plClass() : TclClass("Queue/HRCCPL") {}
         TclObject* create(int, const char*const*) {
-            fprintf(stderr, "Created new TCL HCS instance\n"); // Debug: Peixuan 07062019
+            fprintf(stderr, "Created new TCL HCSPL instance\n"); // Debug: Peixuan 07062019
 	        return (new hierarchicalQueue_pl);
 	}
 } class_hierarchical_queue;
@@ -17,15 +17,15 @@ hierarchicalQueue_pl::hierarchicalQueue_pl():hierarchicalQueue_pl(DEFAULT_VOLUME
 }
 
 hierarchicalQueue_pl::hierarchicalQueue_pl(int volume) {
-    fprintf(stderr, "Created new HCS instance with volumn = %d\n", volume); // Debug: Peixuan 07062019
+    fprintf(stderr, "Created new HCSPL instance with volumn = %d\n", volume); // Debug: Peixuan 07062019
     this->volume = volume;
     flows.push_back(Flow_pl(0, 2, 100));
     flows.push_back(Flow_pl(1, 2, 100));
     flows.push_back(Flow_pl(2, 2, 100));
     flows.push_back(Flow_pl(3, 2, 100));
-    flows.push_back(Flow_pl(4, 20, 1000));        //07062019: Peixuan adding more flows for strange flow 3 problem
-    flows.push_back(Flow_pl(5, 20, 1000));        //07062019: Peixuan adding more flows for strange flow 3 problem
-    flows.push_back(Flow_pl(6, 200, 1000));        //07062019: Peixuan adding more flows for strange flow 3 problem
+    //flows.push_back(Flow_pl(4, 20, 1000));        //07062019: Peixuan adding more flows for strange flow 3 problem
+    //flows.push_back(Flow_pl(5, 20, 1000));        //07062019: Peixuan adding more flows for strange flow 3 problem
+    //flows.push_back(Flow_pl(6, 200, 1000));        //07062019: Peixuan adding more flows for strange flow 3 problem
     //flows.push_back(Flow(1, 0.2));
     // Flow(1, 0.2), Flow(2, 0.3)};
     currentRound = 0;
@@ -67,6 +67,8 @@ void hierarchicalQueue_pl::enque(Packet* packet) {
     // You can get flowId from iph, then get
     // "lastDepartureRound" -- departure round of last packet of this flow
     int departureRound = cal_theory_departure_round(iph, pkt_size);
+    fprintf(stderr, "Calculated departure round of this Flow %d Packet, finish time = %d\n", iph->saddr(), departureRound); // Debug: Peixuan 12142019
+
     ///////////////////////////////////////////////////
 
     // 20190626 Yitao
@@ -208,11 +210,14 @@ int hierarchicalQueue_pl::cal_theory_departure_round(hdr_ip* iph, int pkt_size) 
     //int curFlowID = iph->saddr();   // use source IP as flow id
     //int curFlowID = iph->flowid();   // use flow id as flow id
     string key = convertKeyValue(iph->saddr(), iph->daddr());
-    Flow_pl currFlow = *flowMap[key];
+    //Flow_pl currFlow = *flowMap[key];   // 12142019 Peixuan: We have problem here.
+    //Flow_pl currFlow = Flow_pl(1, 2, 100);   // 12142019 Peixuan: Debug
+    Flow_pl* currFlow = this->getFlowPtr(iph->saddr(), iph->daddr()); //12142019 Peixuan fixed
 
 
-    float curWeight = currFlow.getWeight();
-    int curLastDepartureRound = currFlow.getLastDepartureRound();
+
+    float curWeight = currFlow->getWeight();
+    int curLastDepartureRound = currFlow->getLastDepartureRound();
     int curStartRound = max(currentRound, curLastDepartureRound);
 
     fprintf(stderr, "$$$$$Last Departure Round of Flow%d = %d\n",iph->saddr() , curLastDepartureRound); // Debug: Peixuan 07062019
@@ -658,6 +663,7 @@ vector<Packet*> hierarchicalQueue_pl::serveUpperLevel(int currentRound) {
 
 // 12132019 Peixuan
 Flow_pl* hierarchicalQueue_pl::getFlowPtr(nsaddr_t saddr, nsaddr_t daddr) {
+    fprintf(stderr, "Getting flows with src address %d , dst address = %d\n",saddr, daddr); // Debug: Peixuan 12142019
 //int hierarchicalQueue_pl::getFlowPtr(ns_addr_t saddr, ns_addr_t daddr) {
     //pair<ns_addr_t, ns_addr_t> key = make_pair(saddr, daddr);
     //FlowMap::const_iterator iter; 
@@ -670,17 +676,21 @@ Flow_pl* hierarchicalQueue_pl::getFlowPtr(nsaddr_t saddr, nsaddr_t daddr) {
     //printf("Map size: %d",this->flowMap.size());
     string key = convertKeyValue(saddr, daddr);
     Flow_pl* flow = this->flowMap[key];
+    if (flow == 0) {
+        flow = this->insertNewFlowPtr(saddr, daddr, 2, 100);
+    }
     return flow;
 }
 
-int hierarchicalQueue_pl::insertNewFlowPtr(nsaddr_t saddr, nsaddr_t daddr, int weight, int brustness) {
+Flow_pl* hierarchicalQueue_pl::insertNewFlowPtr(nsaddr_t saddr, nsaddr_t daddr, int weight, int brustness) {
     //pair<ns_addr_t, ns_addr_t> key = make_pair(saddr, daddr);
     string key = convertKeyValue(saddr, daddr);
     Flow_pl* newFlowPtr = new Flow_pl(1, weight, brustness);
     //this->flowMap.insert(pair<pair<ns_addr_t, ns_addr_t>, Flow_pl*>(key, newFlowPtr));
     this->flowMap.insert(pair<string, Flow_pl*>(key, newFlowPtr));
     //flowMap.insert(pair(key, newFlowPtr));
-    return 0;
+    //return 0;
+    return this->flowMap[key];
 }
 
 string hierarchicalQueue_pl::convertKeyValue(nsaddr_t saddr, nsaddr_t daddr) {

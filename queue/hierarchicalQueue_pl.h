@@ -46,7 +46,7 @@ private:
     //12132019 Peixuan
     Flow_pl* getFlowPtr(nsaddr_t saddr, nsaddr_t daddr);
     //int getFlowPtr(ns_addr_t saddr, ns_addr_t daddr);
-    int insertNewFlowPtr(nsaddr_t saddr, nsaddr_t daddr, int weight, int brustness);
+    Flow_pl* insertNewFlowPtr(nsaddr_t saddr, nsaddr_t daddr, int weight, int brustness);
 
     string convertKeyValue(nsaddr_t saddr, nsaddr_t daddr);
 
