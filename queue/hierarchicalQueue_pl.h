@@ -44,11 +44,11 @@ private:
     //TestIntMap testIntMap;
 
     //12132019 Peixuan
-    Flow_pl* getFlowPtr(ns_addr_t saddr, ns_addr_t daddr);
+    Flow_pl* getFlowPtr(nsaddr_t saddr, nsaddr_t daddr);
     //int getFlowPtr(ns_addr_t saddr, ns_addr_t daddr);
-    int insertNewFlowPtr(ns_addr_t saddr, ns_addr_t daddr, int weight, int brustness);
+    int insertNewFlowPtr(nsaddr_t saddr, nsaddr_t daddr, int weight, int brustness);
 
-    string convertKeyValue(ns_addr_t saddr, ns_addr_t daddr);
+    string convertKeyValue(nsaddr_t saddr, nsaddr_t daddr);
 
 
 public:
