@@ -675,10 +675,11 @@ Flow_pl* hierarchicalQueue_pl::getFlowPtr(nsaddr_t saddr, nsaddr_t daddr) {
     //Flow_pl* flow = this->flowMap[key];
     //printf("Map size: %d",this->flowMap.size());
     string key = convertKeyValue(saddr, daddr);
-    Flow_pl* flow = this->flowMap[key];
-    if (flow == 0) {
+    Flow_pl* flow; 
+    if (flowMap.find(key) == flowMap.end()) {
         flow = this->insertNewFlowPtr(saddr, daddr, 2, 100);
     }
+    flow = this->flowMap[key];
     return flow;
 }
 
