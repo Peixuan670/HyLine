@@ -80,6 +80,8 @@ Queue/RPQ set margin $margin_
 
 # Peixuan12102019: Q3, where is this $switchAlg defined?
 #Creating Likns b.w Edges & Hosts
+set switchAlg HPCCPL
+
 for { set pod 0 } { $pod < $num_pod } { incr pod } {
 	for { set edge 0 } { $edge < $num_edg_per_pod } { incr edge } {
 		for { set index 0 } { $index < $num_host_per_sw } { incr index } {
