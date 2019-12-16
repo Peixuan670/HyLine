@@ -13,7 +13,7 @@ public:
 } class_hierarchical_queue;
 
 hierarchicalQueue_pl::hierarchicalQueue_pl():hierarchicalQueue_pl(DEFAULT_VOLUME) {
-    fprintf(stderr, "Created new HCS instance\n"); // Debug: Peixuan 07062019
+    fprintf(stderr, "Created new HCSPL instance\n"); // Debug: Peixuan 07062019
 }
 
 hierarchicalQueue_pl::hierarchicalQueue_pl(int volume) {
