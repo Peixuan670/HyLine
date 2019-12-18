@@ -48,6 +48,8 @@ private:
     //int getFlowPtr(ns_addr_t saddr, ns_addr_t daddr);
     Flow_pl* insertNewFlowPtr(nsaddr_t saddr, nsaddr_t daddr, int weight, int brustness);
 
+    int updateFlowPtr(nsaddr_t saddr, nsaddr_t daddr, Flow_pl* flowPtr);
+
     string convertKeyValue(nsaddr_t saddr, nsaddr_t daddr);
 
 
