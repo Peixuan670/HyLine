@@ -67,7 +67,7 @@ void hierarchicalQueue_pl::enque(Packet* packet) {
     // You can get flowId from iph, then get
     // "lastDepartureRound" -- departure round of last packet of this flow
     int departureRound = cal_theory_departure_round(iph, pkt_size);
-    fprintf(stderr, "Calculated departure round of this Flow %d Packet, finish time = %d\n", iph->saddr(), departureRound); // Debug: Peixuan 12142019
+    //fprintf(stderr, "Calculated departure round of this Flow %d Packet, finish time = %d\n", iph->saddr(), departureRound); // Debug: Peixuan 12142019
 
     ///////////////////////////////////////////////////
 
@@ -663,7 +663,7 @@ vector<Packet*> hierarchicalQueue_pl::serveUpperLevel(int currentRound) {
 
 // 12132019 Peixuan
 Flow_pl* hierarchicalQueue_pl::getFlowPtr(nsaddr_t saddr, nsaddr_t daddr) {
-    fprintf(stderr, "Getting flows with src address %d , dst address = %d\n",saddr, daddr); // Debug: Peixuan 12142019
+    //fprintf(stderr, "Getting flows with src address %d , dst address = %d\n",saddr, daddr); // Debug: Peixuan 12142019
 //int hierarchicalQueue_pl::getFlowPtr(ns_addr_t saddr, ns_addr_t daddr) {
     //pair<ns_addr_t, ns_addr_t> key = make_pair(saddr, daddr);
     //FlowMap::const_iterator iter; 
