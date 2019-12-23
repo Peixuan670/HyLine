@@ -1,45 +1,33 @@
 #include <cmath>
 #include <sstream>
 
-#include "AFQ_10_pl.h"
+#include "AFQ_1000_pl.h"
 
-static class AFQ10_plClass : public TclClass {
+static class AFQ1000_plClass : public TclClass {
 public:
-        AFQ10_plClass() : TclClass("Queue/AFQ10PL") {}
+        AFQ1000_plClass() : TclClass("Queue/AFQ1000PL") {}
         TclObject* create(int, const char*const*) {
-            fprintf(stderr, "Created new TCL AFQ10PL instance\n"); // Debug: Peixuan 07062019
-	        return (new AFQ_10_pl);
+            fprintf(stderr, "Created new TCL AFQ1000PL instance\n"); // Debug: Peixuan 07062019
+	        return (new AFQ_1000_pl);
 	}
-} class_AFQ10;
+} class_AFQ1000;
 
-AFQ_10_pl::AFQ_10_pl():AFQ_10_pl(DEFAULT_VOLUME) {
-    fprintf(stderr, "Created new AFQ10 instance\n"); // Debug: Peixuan 07062019
+AFQ_1000_pl::AFQ_1000_pl():AFQ_1000_pl(DEFAULT_VOLUME) {
+    fprintf(stderr, "Created new AFQ1000 instance\n"); // Debug: Peixuan 07062019
 }
 
-AFQ_10_pl::AFQ_10_pl(int volume) {
-    fprintf(stderr, "Created new AFQ10 instance with volumn = %d\n", volume); // Debug: Peixuan 07062019
+AFQ_1000_pl::AFQ_1000_pl(int volume) {
+    fprintf(stderr, "Created new AFQ1000 instance with volumn = %d\n", volume); // Debug: Peixuan 07062019
     this->volume = volume;
     flows.push_back(Flow_pl(0, 2, 100));
     flows.push_back(Flow_pl(1, 2, 100));
     flows.push_back(Flow_pl(2, 2, 100));
     flows.push_back(Flow_pl(3, 2, 100));
-    //flows.push_back(Flow(4, 20, 1000));        //07062019: Peixuan adding more flows for strange flow 3 problem
-    //flows.push_back(Flow(5, 20, 1000));        //07062019: Peixuan adding more flows for strange flow 3 problem
-    //flows.push_back(Flow(6, 200, 1000));        //07062019: Peixuan adding more flows for strange flow 3 problem
+    flows.push_back(Flow_pl(4, 20, 1000));        //07062019: Peixuan adding more flows for strange flow 3 problem
+    flows.push_back(Flow_pl(5, 20, 1000));        //07062019: Peixuan adding more flows for strange flow 3 problem
+    flows.push_back(Flow_pl(6, 200, 1000));        //07062019: Peixuan adding more flows for strange flow 3 problem
     //flows.push_back(Flow(1, 0.2));
     // Flow(1, 0.2), Flow(2, 0.3)};
-
-    // To remove
-    // insertNewFlowPtr(0, 4.0, 2, 100);
-    // insertNewFlowPtr(1, 4.1, 2, 100);
-    // insertNewFlowPtr(2, 4.2, 2, 100);
-    // insertNewFlowPtr(3, 4.3, 2, 100);
-    // To remove
-
-    //insertNewFlowPtr(10, 10, 2, 100);
-
-
-
     currentRound = 0;
     pktCount = 0; // 07072019 Peixuan
     //pktCurRound = new vector<Packet*>;
@@ -49,17 +37,17 @@ AFQ_10_pl::AFQ_10_pl(int volume) {
     FlowMap flowMap;
 }
 
-void AFQ_10_pl::setCurrentRound(int currentRound) {
+void AFQ_1000_pl::setCurrentRound(int currentRound) {
     fprintf(stderr, "Set Current Round: %d\n", currentRound); // Debug: Peixuan 07062019
     this->currentRound = currentRound;
 }
 
-void AFQ_10_pl::setPktCount(int pktCount) {
+void AFQ_1000_pl::setPktCount(int pktCount) {
     fprintf(stderr, "Set Packet Count: %d\n", pktCount); // Debug: Peixuan 07072019
     this->pktCount = pktCount;
 }
 
-void AFQ_10_pl::enque(Packet* packet) {   
+void AFQ_1000_pl::enque(Packet* packet) {   
     
     hdr_ip* iph = hdr_ip::access(packet);
     int pkt_size = packet->hdrlen_ + packet->datalen();
@@ -77,6 +65,8 @@ void AFQ_10_pl::enque(Packet* packet) {
     /* With departureRound and currentRound, we can get the insertLevel, insertLevel is a parameter of flow and we can set and read this variable.
     */
 
+    //int flowId = iph->flowid();
+
     // Mengqi
     //int flowId = iph->flowid();
     string key = convertKeyValue(iph->saddr(), iph->daddr());
@@ -87,6 +77,7 @@ void AFQ_10_pl::enque(Packet* packet) {
     }
 
     Flow_pl* currFlow = flowMap[key];
+
     //int insertLevel = flows[flowId].getInsertLevel(); //HCS->AFQ
     int insertLevel = 0;
 
@@ -98,7 +89,8 @@ void AFQ_10_pl::enque(Packet* packet) {
         return;   // 07072019 Peixuan: exceeds the maximum round
     }
    
-    // int curFlowID = iph->saddr();   // use source IP as flow id
+    //int curFlowID = iph->saddr();   // use source IP as flow id
+    int curFlowID = iph->flowid();   // use flow id as flow id
     int curBrustness = currFlow->getBrustness();
     if ((departureRound - currentRound) >= curBrustness) {
         fprintf(stderr, "?????Exceeds maximum brustness, drop the packet from Flow %d\n", iph->saddr()); // Debug: Peixuan 07072019
@@ -130,7 +122,7 @@ void AFQ_10_pl::enque(Packet* packet) {
 }
 
 // Peixuan: This can be replaced by any other algorithms
-int AFQ_10_pl::cal_theory_departure_round(hdr_ip* iph, int pkt_size) {
+int AFQ_1000_pl::cal_theory_departure_round(hdr_ip* iph, int pkt_size) {
     //int		fid_;	/* flow id */
     //int		prio_;
     // parameters in iph
@@ -142,19 +134,16 @@ int AFQ_10_pl::cal_theory_departure_round(hdr_ip* iph, int pkt_size) {
     fprintf(stderr, "$$$$$Calculate Departure Round at VC = %d\n", currentRound); // Debug: Peixuan 07062019
 
     //int curFlowID = iph->saddr();   // use source IP as flow id
-    //int curFlowID = iph->flowid();   // use flow id as flow id
+    //float curWeight = flows[curFlowID].getWeight();
+    //int curLastDepartureRound = flows[curFlowID].getLastDepartureRound();
     string key = convertKeyValue(iph->saddr(), iph->daddr());
-    //Flow_pl currFlow = *flowMap[key];   // 12142019 Peixuan: We have problem here.
-    //Flow_pl currFlow = Flow_pl(1, 2, 100);   // 12142019 Peixuan: Debug
-    Flow_pl* currFlow = this->getFlowPtr(iph->saddr(), iph->daddr()); //12142019 Peixuan fixed
+
+    Flow_pl* currFlow = this->getFlowPtr(iph->saddr(), iph->daddr());
 
     float curWeight = currFlow->getWeight();
     int curLastDepartureRound = currFlow->getLastDepartureRound();
     int curStartRound = max(currentRound, curLastDepartureRound);
 
-    //float curWeight = flows[curFlowID].getWeight();
-    //int curLastDepartureRound = flows[curFlowID].getLastDepartureRound();
-    //int curStartRound = max(currentRound, curLastDepartureRound);
 
     fprintf(stderr, "$$$$$Last Departure Round of Flow%d = %d\n",iph->saddr() , curLastDepartureRound); // Debug: Peixuan 07062019
     fprintf(stderr, "$$$$$Start Departure Round of Flow%d = %d\n",iph->saddr() , curStartRound); // Debug: Peixuan 07062019
@@ -173,7 +162,7 @@ int AFQ_10_pl::cal_theory_departure_round(hdr_ip* iph, int pkt_size) {
 
 //06262019 Static getting all the departure packet in this virtual clock unit (JUST FOR SIMULATION PURPUSE!)
 
-Packet* AFQ_10_pl::deque() {
+Packet* AFQ_1000_pl::deque() {
 
     fprintf(stderr, "Start Dequeue\n"); // Debug: Peixuan 07062019
 
@@ -205,7 +194,7 @@ Packet* AFQ_10_pl::deque() {
 }
 
 // Peixuan: now we only call this function to get the departure packet in the next round
-vector<Packet*> AFQ_10_pl::runRound() {
+vector<Packet*> AFQ_1000_pl::runRound() {
 
     fprintf(stderr, "Run Round\n"); // Debug: Peixuan 07062019
 
@@ -240,7 +229,7 @@ vector<Packet*> AFQ_10_pl::runRound() {
 }
 
 // 12132019 Peixuan
-Flow_pl* AFQ_10_pl::getFlowPtr(nsaddr_t saddr, nsaddr_t daddr) {
+Flow_pl* AFQ_1000_pl::getFlowPtr(nsaddr_t saddr, nsaddr_t daddr) {
     fprintf(stderr, "Getting flows with src address %d , dst address = %d\n",saddr, daddr); // Debug: Peixuan 12142019
 //int hierarchicalQueue_pl::getFlowPtr(ns_addr_t saddr, ns_addr_t daddr) {
     //pair<ns_addr_t, ns_addr_t> key = make_pair(saddr, daddr);
@@ -261,14 +250,14 @@ Flow_pl* AFQ_10_pl::getFlowPtr(nsaddr_t saddr, nsaddr_t daddr) {
     return flow;
 }
 
-Flow_pl* AFQ_10_pl::insertNewFlowPtr(nsaddr_t saddr, nsaddr_t daddr, int weight, int brustness) {
+Flow_pl* AFQ_1000_pl::insertNewFlowPtr(nsaddr_t saddr, nsaddr_t daddr, int weight, int brustness) {
     string key = convertKeyValue(saddr, daddr);
     Flow_pl* newFlowPtr = new Flow_pl(1, weight, brustness);
     this->flowMap.insert(pair<string, Flow_pl*>(key, newFlowPtr));
     return this->flowMap[key];
 }
 
-int AFQ_10_pl::updateFlowPtr(nsaddr_t saddr, nsaddr_t daddr, Flow_pl* flowPtr) {
+int AFQ_1000_pl::updateFlowPtr(nsaddr_t saddr, nsaddr_t daddr, Flow_pl* flowPtr) {
     //pair<ns_addr_t, ns_addr_t> key = make_pair(saddr, daddr);
     string key = convertKeyValue(saddr, daddr);
     //Flow_pl* newFlowPtr = new Flow_pl(1, weight, brustness);
@@ -279,7 +268,7 @@ int AFQ_10_pl::updateFlowPtr(nsaddr_t saddr, nsaddr_t daddr, Flow_pl* flowPtr) {
     return 0;
 }
 
-string AFQ_10_pl::convertKeyValue(nsaddr_t saddr, nsaddr_t daddr) {
+string AFQ_1000_pl::convertKeyValue(nsaddr_t saddr, nsaddr_t daddr) {
     stringstream ss;
     ss << saddr;
     ss << ":";
