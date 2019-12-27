@@ -145,8 +145,13 @@ Packet* PQ::deque() {
     struct Unit unit = pq.top();
     pq.pop();
     Packet* p = unit.packet;
-    this->setCurrentRound(unit.finishTime); // Update system virtual clock 12232019 Peixuan
 
+    while(!pktCurRound.size()) {
+        fprintf(stderr, "Empty Round\n");
+        pktCurRound = this->runRound();
+        this->setCurrentRound(unit.finishTime);
+    }
+    // this->setCurrentRound(unit.finishTime); // Update system virtual clock 12232019 Peixuan
     fprintf(stderr, "PIFO dequeue packet with Finish Time of %d\n", unit.finishTime);
     setPktCount(pktCount - 1);
     fprintf(stderr, "Packet Count --\n");
