@@ -66,11 +66,14 @@ void PQ::enque(Packet* packet) {
 
     departureRound = max(departureRound, currentRound);
 
+    /*
+
     if ((departureRound - currentRound) >= SET_GRANULARITY * SET_NUMBER) {
         fprintf(stderr, "?????Exceeds maximum round, drop the packet from Flow %d\n", iph->saddr()); // Debug: Peixuan 07072019
         drop(packet);
         return;   // 07072019 Peixuan: exceeds the maximum round
     }
+    */
    
     //int curFlowID = iph->saddr();   // use source IP as flow id
     int curFlowID = iph->flowid();   // use flow id as flow id
@@ -146,12 +149,8 @@ Packet* PQ::deque() {
     pq.pop();
     Packet* p = unit.packet;
 
-    while(!pktCurRound.size()) {
-        fprintf(stderr, "Empty Round\n");
-        pktCurRound = this->runRound();
-        this->setCurrentRound(unit.finishTime);
-    }
-    // this->setCurrentRound(unit.finishTime); // Update system virtual clock 12232019 Peixuan
+    this->setCurrentRound(unit.finishTime); // Update system virtual clock 12232019 Peixuan
+
     fprintf(stderr, "PIFO dequeue packet with Finish Time of %d\n", unit.finishTime);
     setPktCount(pktCount - 1);
     fprintf(stderr, "Packet Count --\n");

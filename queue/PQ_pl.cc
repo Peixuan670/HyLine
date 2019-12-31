@@ -83,12 +83,15 @@ void PQ_pl::enque(Packet* packet) {
 
     departureRound = max(departureRound, currentRound);
 
+    /*
+
     if ((departureRound - currentRound) >= SET_GRANULARITY * SET_NUMBER) {
         fprintf(stderr, "?????Exceeds maximum round, drop the packet from Flow %d\n", iph->saddr()); // Debug: Peixuan 07072019
         drop(packet);
         return;   // 07072019 Peixuan: exceeds the maximum round
     }
-   
+    */
+
     //int curFlowID = iph->saddr();   // use source IP as flow id
     //int curFlowID = iph->flowid();   // use flow id as flow id
     int curBrustness = currFlow->getBrustness();
@@ -169,6 +172,8 @@ Packet* PQ_pl::deque() {
     struct Unit unit = pq.top();
     pq.pop();
     Packet* p = unit.packet;
+
+    this->setCurrentRound(unit.finishTime);
 
     fprintf(stderr, "PIFO dequeue packet with Finish Time of %d\n", unit.finishTime);
     setPktCount(pktCount - 1);
