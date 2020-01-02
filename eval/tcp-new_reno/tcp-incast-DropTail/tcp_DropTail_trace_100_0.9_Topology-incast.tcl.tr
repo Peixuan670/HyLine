@@ -1,0 +1,665 @@
+Date: Tue Dec 17 09:07:50 PM EST 2019
+start: 1576634870
+flowlog: file3
+num_ports:4 num_pod:4 num_agr_per_pod:2 num_edg_per_pod:2 num_cor_per_agg:2 num_host_per_sw:2 num_cores:4 num_host_per_pod :4 num_hosts:16 num_edgs:8 num_agrs:8
+hostedg_rate:1.0 edgeagg_rate:1.0 aggcore_rate:1.0
+_o74 _o50 _o125 _o122 _o126 _o127 _o52
+_o50 _o74 _o131 _o128 _o132 _o133 _o76
+_o77 _o50 _o137 _o134 _o138 _o139 _o52
+_o50 _o77 _o143 _o140 _o144 _o145 _o79
+_o80 _o53 _o149 _o146 _o150 _o151 _o55
+_o53 _o80 _o155 _o152 _o156 _o157 _o82
+_o83 _o53 _o161 _o158 _o162 _o163 _o55
+_o53 _o83 _o167 _o164 _o168 _o169 _o85
+_o86 _o56 _o173 _o170 _o174 _o175 _o58
+_o56 _o86 _o179 _o176 _o180 _o181 _o88
+_o89 _o56 _o185 _o182 _o186 _o187 _o58
+_o56 _o89 _o191 _o188 _o192 _o193 _o91
+_o92 _o59 _o197 _o194 _o198 _o199 _o61
+_o59 _o92 _o203 _o200 _o204 _o205 _o94
+_o95 _o59 _o209 _o206 _o210 _o211 _o61
+_o59 _o95 _o215 _o212 _o216 _o217 _o97
+_o98 _o62 _o221 _o218 _o222 _o223 _o64
+_o62 _o98 _o227 _o224 _o228 _o229 _o100
+_o101 _o62 _o233 _o230 _o234 _o235 _o64
+_o62 _o101 _o239 _o236 _o240 _o241 _o103
+_o104 _o65 _o245 _o242 _o246 _o247 _o67
+_o65 _o104 _o251 _o248 _o252 _o253 _o106
+_o107 _o65 _o257 _o254 _o258 _o259 _o67
+_o65 _o107 _o263 _o260 _o264 _o265 _o109
+_o110 _o68 _o269 _o266 _o270 _o271 _o70
+_o68 _o110 _o275 _o272 _o276 _o277 _o112
+_o113 _o68 _o281 _o278 _o282 _o283 _o70
+_o68 _o113 _o287 _o284 _o288 _o289 _o115
+_o116 _o71 _o293 _o290 _o294 _o295 _o73
+_o71 _o116 _o299 _o296 _o300 _o301 _o118
+_o119 _o71 _o305 _o302 _o306 _o307 _o73
+_o71 _o119 _o311 _o308 _o312 _o313 _o121
+_o50 _o14 _o317 _o314 _o318 _o319 _o16
+_o14 _o50 _o323 _o320 _o324 _o325 _o52
+_o50 _o17 _o329 _o326 _o330 _o331 _o19
+_o17 _o50 _o335 _o332 _o336 _o337 _o52
+_o53 _o14 _o341 _o338 _o342 _o343 _o16
+_o14 _o53 _o347 _o344 _o348 _o349 _o55
+_o53 _o17 _o353 _o350 _o354 _o355 _o19
+_o17 _o53 _o359 _o356 _o360 _o361 _o55
+_o56 _o20 _o365 _o362 _o366 _o367 _o22
+_o20 _o56 _o371 _o368 _o372 _o373 _o58
+_o56 _o23 _o377 _o374 _o378 _o379 _o25
+_o23 _o56 _o383 _o380 _o384 _o385 _o58
+_o59 _o20 _o389 _o386 _o390 _o391 _o22
+_o20 _o59 _o395 _o392 _o396 _o397 _o61
+_o59 _o23 _o401 _o398 _o402 _o403 _o25
+_o23 _o59 _o407 _o404 _o408 _o409 _o61
+_o62 _o26 _o413 _o410 _o414 _o415 _o28
+_o26 _o62 _o419 _o416 _o420 _o421 _o64
+_o62 _o29 _o425 _o422 _o426 _o427 _o31
+_o29 _o62 _o431 _o428 _o432 _o433 _o64
+_o65 _o26 _o437 _o434 _o438 _o439 _o28
+_o26 _o65 _o443 _o440 _o444 _o445 _o67
+_o65 _o29 _o449 _o446 _o450 _o451 _o31
+_o29 _o65 _o455 _o452 _o456 _o457 _o67
+_o68 _o32 _o461 _o458 _o462 _o463 _o34
+_o32 _o68 _o467 _o464 _o468 _o469 _o70
+_o68 _o35 _o473 _o470 _o474 _o475 _o37
+_o35 _o68 _o479 _o476 _o480 _o481 _o70
+_o71 _o32 _o485 _o482 _o486 _o487 _o34
+_o32 _o71 _o491 _o488 _o492 _o493 _o73
+_o71 _o35 _o497 _o494 _o498 _o499 _o37
+_o35 _o71 _o503 _o500 _o504 _o505 _o73
+_o38 _o14 _o509 _o506 _o510 _o511 _o16
+_o14 _o38 _o515 _o512 _o516 _o517 _o40
+_o41 _o14 _o521 _o518 _o522 _o523 _o16
+_o14 _o41 _o527 _o524 _o528 _o529 _o43
+_o44 _o17 _o533 _o530 _o534 _o535 _o19
+_o17 _o44 _o539 _o536 _o540 _o541 _o46
+_o47 _o17 _o545 _o542 _o546 _o547 _o19
+_o17 _o47 _o551 _o548 _o552 _o553 _o49
+_o38 _o20 _o557 _o554 _o558 _o559 _o22
+_o20 _o38 _o563 _o560 _o564 _o565 _o40
+_o41 _o20 _o569 _o566 _o570 _o571 _o22
+_o20 _o41 _o575 _o572 _o576 _o577 _o43
+_o44 _o23 _o581 _o578 _o582 _o583 _o25
+_o23 _o44 _o587 _o584 _o588 _o589 _o46
+_o47 _o23 _o593 _o590 _o594 _o595 _o25
+_o23 _o47 _o599 _o596 _o600 _o601 _o49
+_o38 _o26 _o605 _o602 _o606 _o607 _o28
+_o26 _o38 _o611 _o608 _o612 _o613 _o40
+_o41 _o26 _o617 _o614 _o618 _o619 _o28
+_o26 _o41 _o623 _o620 _o624 _o625 _o43
+_o44 _o29 _o629 _o626 _o630 _o631 _o31
+_o29 _o44 _o635 _o632 _o636 _o637 _o46
+_o47 _o29 _o641 _o638 _o642 _o643 _o31
+_o29 _o47 _o647 _o644 _o648 _o649 _o49
+_o38 _o32 _o653 _o650 _o654 _o655 _o34
+_o32 _o38 _o659 _o656 _o660 _o661 _o40
+_o41 _o32 _o665 _o662 _o666 _o667 _o34
+_o32 _o41 _o671 _o668 _o672 _o673 _o43
+_o44 _o35 _o677 _o674 _o678 _o679 _o37
+_o35 _o44 _o683 _o680 _o684 _o685 _o46
+_o47 _o35 _o689 _o686 _o690 _o691 _o37
+_o35 _o47 _o695 _o692 _o696 _o697 _o49
+Arrival: Poisson with inter-arrival 15.173333333333332 ms
+FlowSize: Web Search (DCTCP) with mean = 1661480
+Setting up connections ...
+(0,0,0,3,1,1) (0,0,1,3,1,1) (0,1,0,3,1,1) (0,1,1,3,1,1) (1,0,0,3,1,1) (1,0,1,3,1,1) (1,1,0,3,1,1) (1,1,1,3,1,1) (2,0,0,3,1,1) (2,0,1,3,1,1) (2,1,0,3,1,1) (2,1,1,3,1,1) Initial agent creation done
+Simulation started!
+Date: Tue Dec 17 09:07:51 PM EST 2019
+1.299570: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.300159: fid 19 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.311188: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.311380: fid 19 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.314668: fid 17 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.323070: fid 15 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.323118: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.323394: fid 17 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.323839: fid 14 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.332853: fid 13 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.333729: fid 12 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.334748: fid 15 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.334868: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.343688: fid 13 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.343952: fid 34 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.344109: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.357189: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.357369: fid 15 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.358869: fid 34 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.359518: fid 28 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.399575: fid 34 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.399719: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.400847: fid 15 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.400919: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.402191: fid 13 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.402731: fid 14 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.403535: fid 12 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.424730: fid 42 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.424970: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.425653: fid 34 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.426218: fid 12 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.426230: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.426302: fid 46 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.426434: fid 13 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.427190: fid 17 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.454959: fid 13 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.455775: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.456171: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.456411: fid 34 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.456711: fid 14 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.456771: fid 15 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.457443: fid 12 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.477616: fid 15 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.477628: fid 14 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.477736: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.479273: fid 54 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.479741: fid 17 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.479945: fid 34 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.480749: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.480857: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.481109: fid 46 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.483630: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:19
+1.537429: fid 12 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.537729: fid 46 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.546921: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.549993: fid 34 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.550077: fid 54 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.550881: fid 13 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.552597: fid 66 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.555657: fid 17 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.555789: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.558741: fid 46 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.561898: fid 54 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.568330: fid 15 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.569710: fid 66 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.570046: fid 12 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.570946: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.570958: fid 60 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.571210: fid 13 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.595308: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.595404: fid 34 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.597888: fid 54 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.598128: fid 46 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.610945: fid 60 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.612865: fid 46 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.613189: fid 34 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.613202: fid 15 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.614030: fid 50 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.615146: fid 54 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.615506: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.615602: fid 14 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.635487: fid 60 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.636207: fid 66 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.636411: fid 46 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.638631: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.639111: fid 14 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.639351: fid 34 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.653127: fid 66 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.653559: fid 15 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.655731: fid 60 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.655947: fid 54 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.656535: fid 34 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.656667: fid 14 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.658707: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.664600: fid 60 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.664780: fid 26 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.664876: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.665164: fid 15 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.665572: fid 14 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.676804: fid 66 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.677344: fid 34 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.677380: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.679432: fid 13 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.679900: fid 54 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.680320: fid 14 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.681856: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.695789: fid 60 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.695885: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.696209: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.696221: fid 54 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.696809: fid 34 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.696881: fid 14 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.698945: fid 13 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.698969: fid 17 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.699293: fid 66 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.704801: fid 12 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.705185: fid 13 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.705281: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.706662: fid 44 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.706818: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.707478: fid 60 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.725503: fid 46 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.725610: fid 44 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.725958: fid 54 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.726090: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.726990: fid 74 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.727818: fid 13 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.728454: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.729127: fid 66 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.729186: fid 60 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.729643: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.748617: fid 12 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.748665: fid 66 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.748701: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.749049: fid 44 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.749301: fid 13 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.749949: fid 17 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.750273: fid 46 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.750885: fid 54 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.751186: fid 86 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.752313: fid 14 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.752673: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.752853: fid 15 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.774565: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.775693: fid 44 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.775933: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.776749: fid 36 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.777145: fid 92 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.777409: fid 60 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.777469: fid 66 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.777733: fid 19 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.777865: fid 13 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.778105: fid 17 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.778645: fid 14 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.778957: fid 15 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.779281: fid 12 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.779365: fid 26 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.798661: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.799309: fid 60 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.799681: fid 36 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.799837: fid 66 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.800161: fid 13 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.800317: fid 19 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.800461: fid 44 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.801013: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.801169: fid 14 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.801457: fid 15 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.801829: fid 26 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.802957: fid 17 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.824041: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.824065: fid 46 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.824233: fid 14 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.824545: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.824833: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.825349: fid 12 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.825649: fid 36 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.825817: fid 19 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.825949: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.826429: fid 17 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.826453: fid 44 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.827450: fid 15 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.827702: fid 26 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.828326: fid 13 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.836235: fid 13 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.836367: fid 19 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.836403: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.836715: fid 46 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.837028: fid 90 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.837339: fid 14 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.838096: fid 60 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.839104: fid 26 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.839487: fid 36 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.839668: fid 17 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.840376: fid 15 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.865602: fid 90 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.865818: fid 19 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.866178: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.866310: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.867258: fid 15 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.869406: fid 36 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.869598: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.870078: fid 60 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.870090: fid 92 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.885884: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.886316: fid 12 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.888416: fid 14 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.888680: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.888692: fid 36 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.888920: fid 92 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.889004: fid 15 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.897105: fid 114 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.897813: fid 15 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.897909: fid 92 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.898689: fid 90 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.899241: fid 19 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.899553: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.900478: fid 14 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.913702: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.914050: fid 114 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.914326: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.914518: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.914590: fid 60 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.915515: fid 17 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.915636: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.916055: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.917543: fid 26 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.917951: fid 36 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.938087: fid 19 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.938531: fid 17 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.938699: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.938903: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.939143: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.939431: fid 114 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.939887: fid 46 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.940127: fid 15 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.940367: fid 92 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.942371: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.968088: fid 19 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.968940: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.968952: fid 17 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.969348: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.969732: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.970068: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.970740: fid 26 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.972072: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.972384: fid 50 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.990554: fid 26 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.990854: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.991070: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.991226: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.993866: fid 17 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.994094: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.994250: fid 50 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.994322: fid 46 did a fast retransmit - dupacks = 3 prio:0 state:20
+1.994646: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.014759: fid 26 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.014867: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.015251: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.015648: fid 15 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.015911: fid 46 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.017255: fid 17 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.017975: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.032639: fid 46 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.032795: fid 92 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.033959: fid 36 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.034919: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.034955: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.035927: fid 15 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.036803: fid 17 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.036863: fid 26 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.037523: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.050173: fid 130 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.050652: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.054660: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.055716: fid 19 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.057684: fid 14 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.066974: fid 52 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.067021: fid 36 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.068137: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.068641: fid 92 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.068894: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.069001: fid 46 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.069553: fid 14 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.069890: fid 17 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.085249: fid 14 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.085693: fid 17 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.085729: fid 52 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.086221: fid 26 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.086257: fid 19 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.086629: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.087289: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.087577: fid 92 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.087613: fid 46 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.089029: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.100310: fid 134 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.100874: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.101018: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.101114: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.101642: fid 15 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.102050: fid 36 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.102230: fid 14 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.102878: fid 26 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.103526: fid 19 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.115852: fid 36 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.116056: fid 26 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.116367: fid 134 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.116463: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.118036: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.118239: fid 92 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.118707: fid 52 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.119055: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.119391: fid 46 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.120184: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.120771: fid 15 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.138893: fid 19 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.139073: fid 134 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.150330: fid 14 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.150414: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.150582: fid 26 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.150618: fid 19 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.150954: fid 46 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.151566: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.152202: fid 92 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.152622: fid 15 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.152634: fid 52 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.152982: fid 36 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.154254: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.164120: fid 136 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.165740: fid 17 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.165968: fid 14 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.166004: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.166184: fid 26 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.166268: fid 19 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.166592: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.167504: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.168944: fid 110 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.169412: fid 46 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.169592: fid 36 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.169964: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.172880: fid 15 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.180489: fid 136 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.180501: fid 110 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.180585: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.220558: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.220751: fid 110 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.220834: fid 136 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.222335: fid 14 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.223846: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.224986: fid 46 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.225202: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.244656: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.245423: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.245628: fid 110 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.246216: fid 14 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.246396: fid 26 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.246503: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.246683: fid 19 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.249000: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.265158: fid 150 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.265710: fid 52 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.266022: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.266213: fid 19 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.267149: fid 136 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.267257: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.267629: fid 110 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.269069: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.289029: fid 94 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.289618: fid 52 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.289941: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.308086: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.308135: fid 26 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.308291: fid 19 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.308674: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.309479: fid 110 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.310079: fid 158 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.310366: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.310619: fid 14 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.333155: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.334919: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.335819: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.336095: fid 110 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.337667: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.337847: fid 26 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.337931: fid 17 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.353580: fid 158 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.354528: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.354912: fid 26 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.354996: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.356244: fid 14 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.357289: fid 17 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.357637: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.358141: fid 110 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.394323: fid 26 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.394935: fid 162 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.395607: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.395919: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.396159: fid 110 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.396927: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.396999: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.397335: fid 17 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.397527: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.420543: fid 17 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.421767: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.422151: fid 52 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.423495: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.423507: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.423579: fid 26 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.423975: fid 162 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.424359: fid 19 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.424443: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.425091: fid 110 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.425835: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.445779: fid 110 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.446345: fid 172 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.448480: fid 52 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.449584: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.449812: fid 17 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.449932: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.450160: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.450412: fid 162 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.450616: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.450772: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.471042: fid 26 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.471786: fid 19 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.473214: fid 172 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.473262: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.473334: fid 52 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.473514: fid 17 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.473574: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.473874: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.473934: fid 162 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.474282: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.474870: fid 94 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.500996: fid 162 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.501609: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.502029: fid 94 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.502893: fid 172 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.503025: fid 52 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.503157: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.503289: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.503385: fid 17 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.503565: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.504502: fid 110 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.517463: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.517703: fid 186 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.517871: fid 110 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.518400: fid 19 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.518520: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.518855: fid 172 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.519059: fid 17 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.519096: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.519180: fid 26 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.519539: fid 162 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.521519: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.555508: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.556312: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.556528: fid 19 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.556972: fid 118 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.557248: fid 110 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.557428: fid 52 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.557692: fid 186 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.558544: fid 162 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.560416: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.583000: fid 52 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.583648: fid 186 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.584404: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.585064: fid 94 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.585076: fid 19 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.586036: fid 110 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.586120: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.586444: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.586516: fid 162 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.587824: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.614422: fid 96 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.614698: fid 94 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.614818: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.615958: fid 52 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.616330: fid 16 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.617026: fid 180 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.617110: fid 18 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.617902: fid 118 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.617914: fid 19 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.618538: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.659377: fid 110 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.659437: fid 118 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.660289: fid 96 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.660733: fid 52 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.660985: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.661513: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.662881: fid 94 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.662965: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.712638: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.712806: fid 52 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.714822: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.714918: fid 94 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.715398: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.715842: fid 19 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.716082: fid 110 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.740553: fid 96 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.740757: fid 94 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.741165: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.741261: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.741849: fid 52 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.742293: fid 202 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.742533: fid 19 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.742881: fid 110 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.743685: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.765240: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.765588: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.765888: fid 224 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.766560: fid 202 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.766956: fid 110 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.768924: fid 94 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.769548: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.779113: fid 212 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.797461: fid 212 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.799081: fid 19 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.801289: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.802213: fid 224 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.817766: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.818990: fid 224 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.819206: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.820718: fid 94 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.821762: fid 52 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.821906: fid 96 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.854190: fid 94 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.854418: fid 19 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.854634: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.855246: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.855486: fid 52 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.855678: fid 96 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.856494: fid 202 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.856758: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:Simulation Finished!
+Time 4 sec
+20
+2.858630: fid 156 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.858666: fid 124 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.915320: fid 19 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.915908: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.916400: fid 52 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.916856: fid 156 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.918392: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.919124: fid 96 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.960056: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.960596: fid 52 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.960860: fid 96 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.961064: fid 202 did a fast retransmit - dupacks = 3 prio:0 state:20
+2.962180: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+3.014945: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:20
+3.015665: fid 96 did a fast retransmit - dupacks = 3 prio:0 state:20
+3.016781: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:20
+3.017573: fid 20 did a fast retransmit - dupacks = 3 prio:0 state:20
+3.017609: fid 19 did a fast retransmit - dupacks = 3 prio:0 state:20
+3.104922: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:21
+3.106350: fid 96 did a fast retransmit - dupacks = 3 prio:0 state:21
+3.106566: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:21
+3.244351: fid 100 did a fast retransmit - dupacks = 3 prio:0 state:21
+3.246007: fid 32 did a fast retransmit - dupacks = 3 prio:0 state:21
