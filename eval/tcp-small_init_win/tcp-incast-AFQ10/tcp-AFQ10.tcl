@@ -1,4 +1,4 @@
-set myAgent "Agent/TCP/NewReno";
+set myAgent "Agent/TCP/FullTcp/Sack/SolTCP";
 set switchAlg "AFQ10PL"
 set hybrid 0
 set Elp_win_init_ 80;#50#68;#BDP #[lindex $argv 5] 
@@ -31,7 +31,8 @@ set Elp_min_rto  0.004;#[lindex $argv 5]
 set min_deadline_offset 0.5
 #set max_deadline_offset [lindex $argv 6]
 set ld [lindex $argv 1]
-set win_init_ 25;#50#68;#BDP #[lindex $argv 5] 
+#set win_init_ 25;#50#68;#BDP #[lindex $argv 5] 
+set win_init_ 1;#50#68;#BDP #[lindex $argv 5]  Peixuan 01022020
 #set maxcwnd 50;#$size_queue;#25,68,149;#[lindex $argv 6]
 
 set pfc_thr1_edg_agg [expr $size_queue-6];#[lindex $argv 6]
