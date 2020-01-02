@@ -49,7 +49,8 @@ set enable_deadline 0;#[lindex $argv 4]
 set flowlog [open tcp_flow_$num_flow\_$ld\_$top.tr w]
 puts "flowlog: $flowlog"
 
-set win_init_ 25;#25;#68;#BDP #[lindex $argv 5] 
+#set win_init_ 25;#25;#68;#BDP #[lindex $argv 5]
+set win_init_ 1;#50#68;#BDP #[lindex $argv 5]  Peixuan 01022020 
 set maxcwnd $size_queue;#68;#149[lindex $argv 6]
 
 #puts "enable_deadline=$enable_deadline"
