@@ -19,13 +19,13 @@ AFQ_100_pl::AFQ_100_pl():AFQ_100_pl(DEFAULT_VOLUME) {
 AFQ_100_pl::AFQ_100_pl(int volume) {
     fprintf(stderr, "Created new AFQ100 instance with volumn = %d\n", volume); // Debug: Peixuan 07062019
     this->volume = volume;
-    flows.push_back(Flow_pl(0, 2, 100));
-    flows.push_back(Flow_pl(1, 2, 100));
-    flows.push_back(Flow_pl(2, 2, 100));
-    flows.push_back(Flow_pl(3, 2, 100));
-    flows.push_back(Flow_pl(4, 20, 1000));        //07062019: Peixuan adding more flows for strange flow 3 problem
-    flows.push_back(Flow_pl(5, 20, 1000));        //07062019: Peixuan adding more flows for strange flow 3 problem
-    flows.push_back(Flow_pl(6, 200, 1000));        //07062019: Peixuan adding more flows for strange flow 3 problem
+    //flows.push_back(Flow_pl(0, 2, 100));
+    //flows.push_back(Flow_pl(1, 2, 100));
+    //flows.push_back(Flow_pl(2, 2, 100));
+    //flows.push_back(Flow_pl(3, 2, 100));
+    //flows.push_back(Flow_pl(4, 20, 1000));        //07062019: Peixuan adding more flows for strange flow 3 problem
+    //flows.push_back(Flow_pl(5, 20, 1000));        //07062019: Peixuan adding more flows for strange flow 3 problem
+    //flows.push_back(Flow_pl(6, 200, 1000));        //07062019: Peixuan adding more flows for strange flow 3 problem
     //flows.push_back(Flow(1, 0.2));
     // Flow(1, 0.2), Flow(2, 0.3)};
     currentRound = 0;
@@ -242,7 +242,7 @@ Flow_pl* AFQ_100_pl::getFlowPtr(nsaddr_t saddr, nsaddr_t daddr) {
     string key = convertKeyValue(saddr, daddr);
     Flow_pl* flow; 
     if (flowMap.find(key) == flowMap.end()) {
-        flow = this->insertNewFlowPtr(saddr, daddr, 2, 100);
+        flow = this->insertNewFlowPtr(saddr, daddr, DEFAULT_WEIGHT, DEFAULT_BRUSTNESS);
     }
     flow = this->flowMap[key];
     return flow;
