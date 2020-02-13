@@ -48,7 +48,12 @@ $ns duplex-link $n3 $n4 120Mb 3ms DropTail
 #$ns duplex-link $n4 $n5 40Mb 3ms AFQ100
 #$ns duplex-link $n4 $n5 40Mb 3ms AFQ1000
 #$ns duplex-link $n4 $n5 40Mb 3ms DropTail
-$ns duplex-link $n4 $n5 40Mb 3ms HRCCPL
+#$ns duplex-link $n4 $n5 40Mb 3ms HRCCPL
+#$ns duplex-link $n4 $n5 40Mb 3ms PQ
+#$ns duplex-link $n4 $n5 40Mb 3ms PQPL
+#$ns duplex-link $n4 $n5 40Mb 3ms AFQ10PL
+#$ns duplex-link $n4 $n5 40Mb 3ms AFQ100PL
+$ns duplex-link $n4 $n5 40Mb 3ms AFQ1000PL
 $ns queue-limit $n4 $n5 100
 
 #set nodes position
