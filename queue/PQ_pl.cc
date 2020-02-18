@@ -58,7 +58,6 @@ void PQ_pl::enque(Packet* packet) {
     // TODO: get theory departure Round
     // You can get flowId from iph, then get
     // "lastDepartureRound" -- departure round of last packet of this flow
-    int departureRound = cal_theory_departure_round(iph, pkt_size);
     ///////////////////////////////////////////////////
 
     // 20190626 Yitao
@@ -80,6 +79,8 @@ void PQ_pl::enque(Packet* packet) {
     Flow_pl* currFlow = flowMap[key];
 
     int insertLevel = 0;
+
+    int departureRound = cal_theory_departure_round(iph, pkt_size);
 
     departureRound = max(departureRound, currentRound);
 
