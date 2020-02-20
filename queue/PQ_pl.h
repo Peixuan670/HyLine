@@ -23,15 +23,16 @@ private:
     int volume;                     // num of levels in scheduler
     int currentRound;           // current Round
     int pktCount;           // packet count
-
+    int globalcount = 0;
     struct Unit {
+        int id;
         Packet* packet;
         int finishTime;
     };
 
     struct cmp{
         bool operator() (Unit a, Unit b) {
-            return (a.finishTime < b.finishTime);
+            return (a.finishTime > b.finishTime);
         }
     };
 

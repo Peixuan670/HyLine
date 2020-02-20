@@ -52,12 +52,11 @@ void PQ_pl::enque(Packet* packet) {
     hdr_ip* iph = hdr_ip::access(packet);
     int pkt_size = packet->hdrlen_ + packet->datalen();
 
-    fprintf(stderr, "AAAAA Start Enqueue Flow %d Packet\n", iph->saddr()); // Debug: Peixuan 07062019
-
     ///////////////////////////////////////////////////
     // TODO: get theory departure Round
     // You can get flowId from iph, then get
     // "lastDepartureRound" -- departure round of last packet of this flow
+    int departureRound = cal_theory_departure_round(iph, pkt_size);
     ///////////////////////////////////////////////////
 
     // 20190626 Yitao
@@ -80,8 +79,6 @@ void PQ_pl::enque(Packet* packet) {
 
     int insertLevel = 0;
 
-    int departureRound = cal_theory_departure_round(iph, pkt_size);
-
     departureRound = max(departureRound, currentRound);
 
     /*
@@ -97,7 +94,6 @@ void PQ_pl::enque(Packet* packet) {
     //int curFlowID = iph->flowid();   // use flow id as flow id
     int curBrustness = currFlow->getBrustness();
     if ((departureRound - currentRound) >= curBrustness) {
-        fprintf(stderr, "?????Exceeds maximum brustness, drop the packet from Flow %d\n", iph->saddr()); // Debug: Peixuan 07072019
         drop(packet);
         return;   // 07102019 Peixuan: exceeds the maximum brustness
     }
@@ -110,13 +106,11 @@ void PQ_pl::enque(Packet* packet) {
 
     unit.packet = packet;
     unit.finishTime = departureRound;
+    unit.id = globalcount++;
     pq.push(unit);
-
+    fprintf(stderr, "MengqiN Enqueue Debug flowid: %d pkg id: %d finishtime: %d\n", iph->saddr(), unit.id, unit.finishTime);
 
     setPktCount(pktCount + 1);
-    fprintf(stderr, "Packet Count ++\n");
-
-    fprintf(stderr, "Finish Enqueue\n");
 }
 
 // Peixuan: This can be replaced by any other algorithms
@@ -161,8 +155,6 @@ int PQ_pl::cal_theory_departure_round(hdr_ip* iph, int pkt_size) {
 
 Packet* PQ_pl::deque() {
 
-    fprintf(stderr, "Start Dequeue\n"); // Debug: Peixuan 07062019
-
     //fprintf(stderr, "Queue size: %d\n",pktCurRound.size()); // Debug: Peixuan 07062019
 
     if (pktCount == 0) {
@@ -176,13 +168,9 @@ Packet* PQ_pl::deque() {
 
     this->setCurrentRound(unit.finishTime);
 
-    fprintf(stderr, "PIFO dequeue packet with Finish Time of %d\n", unit.finishTime);
     setPktCount(pktCount - 1);
-    fprintf(stderr, "Packet Count --\n");
-
     hdr_ip* iph = hdr_ip::access(p);
-    fprintf(stderr, "*****Dequeue Packet p with soure IP: %x\n", iph->saddr()); // Debug: Peixuan 07062019
-
+    fprintf(stderr, "MengqiN Debug flowid: %d pkg id: %d finishtime: %d\n", iph->saddr(), unit.id, unit.finishTime);
     return p;
 
 }
