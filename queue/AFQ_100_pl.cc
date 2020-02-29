@@ -71,7 +71,8 @@ void AFQ_100_pl::enque(Packet* packet) {
     // Not find the current key
     if (flowMap.find(key) == flowMap.end()) {
         //flowMap[key] = Flow_pl(iph->saddr, iph->daddr, 2, 100);
-        insertNewFlowPtr(iph->saddr(), iph->daddr(), 2, 100);
+        //insertNewFlowPtr(iph->saddr(), iph->daddr(), 2, 100);
+        insertNewFlowPtr(iph->saddr(), iph->daddr(), DEFAULT_WEIGHT, DEFAULT_BRUSTNESS);
     }
 
     Flow_pl* currFlow = flowMap[key];
