@@ -10,6 +10,9 @@ using namespace std;
 class hierarchicalQueue_pl : public Queue {
 private:
     static const int DEFAULT_VOLUME = 3;
+    static const int DEFAULT_WEIGHT = 2;         // 01032019 Peixuan default weight
+    static const int DEFAULT_BRUSTNESS = 100;    // 01032019 Peixuan default brustness
+    static const int TIMEUNIT = 1;    // 01032019 Peixuan default brustness
     int volume;                     // num of levels in scheduler
     int currentRound;           // current Round
     int pktCount;           // packet count
@@ -26,7 +29,7 @@ private:
     bool level0ServingB;          // is serve Back up Levels
     bool level1ServingB;          // is serve Back up Levels
 
-    vector<Flow_pl> flows;
+    //vector<Flow_pl> flows;
     //06262019 Peixuan
     vector<Packet*> pktCurRound;
 
