@@ -12,8 +12,11 @@ private:
     static const int SET_NUMBER = 7;
     static const int SET_GRANULARITY = 1000;       // TimeStamp Range of each queue set (level.cc)
     static const int DEFAULT_VOLUME = 7;
+<<<<<<< HEAD
     static const int DEFAULT_WEIGHT = 2;         // 01032019 Peixuan default weight
     static const int DEFAULT_BRUSTNESS = 100;    // 01032019 Peixuan default brustness
+=======
+>>>>>>> 90c694d050d346f3318fd406952e2b6d422a47b9
     int volume;                     // num of levels in scheduler
     int currentRound;           // current Round
     int pktCount;           // packet count
@@ -21,7 +24,7 @@ private:
     Level levels[SET_NUMBER];        // same queue number with HCS
     //Level hundredLevel;
     //Level decadeLevel;
-    //vector<Flow_pl> flows;
+    vector<Flow_pl> flows;
     //06262019 Peixuan
     vector<Packet*> pktCurRound;
 

@@ -21,7 +21,7 @@ private:
     Level levels[SET_NUMBER];        // same queue number with HCS
     //Level hundredLevel;
     //Level decadeLevel;
-    vector<Flow_pl> flows;
+    //vector<Flow_pl> flows;
     //06262019 Peixuan
     vector<Packet*> pktCurRound;
 
