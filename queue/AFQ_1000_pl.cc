@@ -177,7 +177,7 @@ Packet* AFQ_1000_pl::deque() {
     while (!pktCurRound.size()) {
         fprintf(stderr, "Empty Round\n"); // Debug: Peixuan 07062019
         pktCurRound = this->runRound();
-        this->setCurrentRound(currentRound + 1); // Update system virtual clock
+        this->setCurrentRound(currentRound + 100); // Update system virtual clock
         //this->deque();
     }
 

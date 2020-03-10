@@ -2,6 +2,7 @@
 #include <sstream>
 
 #include "AFQ_100_pl.h"
+#include "tcp.h"    // Peixuan 03092020
 
 static class AFQ100_plClass : public TclClass {
 public:
@@ -62,6 +63,7 @@ void AFQ_100_pl::setPktCount(int pktCount) {
 void AFQ_100_pl::enque(Packet* packet) {   
     
     hdr_ip* iph = hdr_ip::access(packet);
+    hdr_tcp* tcph = hdr_tcp::access(packet);   // 03092020 Peixuan: getting tcp header for seq
     int pkt_size = packet->hdrlen_ + packet->datalen();
 
     fprintf(stderr, "AAAAA Start Enqueue Flow %d Packet\n", iph->saddr()); // Debug: Peixuan 07062019
@@ -70,7 +72,8 @@ void AFQ_100_pl::enque(Packet* packet) {
     // TODO: get theory departure Round
     // You can get flowId from iph, then get
     // "lastDepartureRound" -- departure round of last packet of this flow
-    int departureRound = cal_theory_departure_round(iph, pkt_size);
+    int departureRound = cal_theory_departure_round(iph, pkt_size, tcph); //Peixuan 03092020
+    //int departureRound = cal_theory_departure_round(iph, pkt_size);
     ///////////////////////////////////////////////////
 
     // 20190626 Yitao
@@ -130,7 +133,8 @@ void AFQ_100_pl::enque(Packet* packet) {
 }
 
 // Peixuan: This can be replaced by any other algorithms
-int AFQ_100_pl::cal_theory_departure_round(hdr_ip* iph, int pkt_size) {
+int AFQ_100_pl::cal_theory_departure_round(hdr_ip* iph, int pkt_size, hdr_tcp* tcph) {
+//int AFQ_100_pl::cal_theory_departure_round(hdr_ip* iph, int pkt_size) {
     //int		fid_;	/* flow id */
     //int		prio_;
     // parameters in iph
@@ -163,7 +167,7 @@ int AFQ_100_pl::cal_theory_departure_round(hdr_ip* iph, int pkt_size) {
 
     int curDeaprtureRound = (int)(curStartRound + curWeight); // 07072019 Peixuan: basic test
 
-    fprintf(stderr, "$$$$$Calculated Packet From Flow:%d with Departure Round = %d\n",iph->saddr() , curDeaprtureRound); // Debug: Peixuan 07062019
+    fprintf(stderr, "$$$$$Calculated Packet %d From Flow:%d with Departure Round = %d\n", tcph->seqno(), iph->saddr(), curDeaprtureRound); // Debug: Peixuan 03092020
     // TODO: need packet length and bandwidh relation
     //flows[curFlowID].setLastDepartureRound(curDeaprtureRound);
     return curDeaprtureRound;
@@ -187,7 +191,7 @@ Packet* AFQ_100_pl::deque() {
     while (!pktCurRound.size()) {
         fprintf(stderr, "Empty Round\n"); // Debug: Peixuan 07062019
         pktCurRound = this->runRound();
-        this->setCurrentRound(currentRound + 1); // Update system virtual clock
+        this->setCurrentRound(currentRound + 10); // Update system virtual clock
         //this->deque();
     }
 

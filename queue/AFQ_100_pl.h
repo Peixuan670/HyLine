@@ -1,5 +1,6 @@
 #include "Level.h"
 #include "Flow_pl.h"
+#include "tcp.h"    // Peixuan 03092020
 #include <vector>
 #include <string>
 
@@ -52,7 +53,8 @@ public:
     void enque(Packet*);
     Packet* deque();
     void setCurrentRound(int);
-    int cal_theory_departure_round(hdr_ip*, int);
+    int cal_theory_departure_round(hdr_ip*, int, hdr_tcp*);
+    //int cal_theory_departure_round(hdr_ip*, int);
     int cal_insert_level(int, int);
     // Packet* serveCycle();
     // vector<Packet> serveUpperLevel(int &, int);
