@@ -2,6 +2,7 @@
 #include <sstream>
 
 #include "AFQ_100_pl.h"
+#include "tcp.h"    // Peixuan 03092020
 
 static class AFQ100_plClass : public TclClass {
 public:
@@ -13,7 +14,7 @@ public:
 } class_AFQ100;
 
 AFQ_100_pl::AFQ_100_pl():AFQ_100_pl(DEFAULT_VOLUME) {
-    fprintf(stderr, "Created new AFQ10 instance\n"); // Debug: Peixuan 07062019
+    fprintf(stderr, "Created new AFQ100 instance\n"); // Debug: Peixuan 07062019
 }
 
 AFQ_100_pl::AFQ_100_pl(int volume) {
@@ -23,16 +24,28 @@ AFQ_100_pl::AFQ_100_pl(int volume) {
     //flows.push_back(Flow_pl(1, 2, 100));
     //flows.push_back(Flow_pl(2, 2, 100));
     //flows.push_back(Flow_pl(3, 2, 100));
-    //flows.push_back(Flow_pl(4, 20, 1000));        //07062019: Peixuan adding more flows for strange flow 3 problem
-    //flows.push_back(Flow_pl(5, 20, 1000));        //07062019: Peixuan adding more flows for strange flow 3 problem
-    //flows.push_back(Flow_pl(6, 200, 1000));        //07062019: Peixuan adding more flows for strange flow 3 problem
+    //flows.push_back(Flow(4, 20, 1000));        //07062019: Peixuan adding more flows for strange flow 3 problem
+    //flows.push_back(Flow(5, 20, 1000));        //07062019: Peixuan adding more flows for strange flow 3 problem
+    //flows.push_back(Flow(6, 200, 1000));        //07062019: Peixuan adding more flows for strange flow 3 problem
     //flows.push_back(Flow(1, 0.2));
     // Flow(1, 0.2), Flow(2, 0.3)};
+
+    // To remove
+    // insertNewFlowPtr(0, 4.0, 2, 100);
+    // insertNewFlowPtr(1, 4.1, 2, 100);
+    // insertNewFlowPtr(2, 4.2, 2, 100);
+    // insertNewFlowPtr(3, 4.3, 2, 100);
+    // To remove
+
+    //insertNewFlowPtr(10, 10, 2, 100);
+
+
+
     currentRound = 0;
     pktCount = 0; // 07072019 Peixuan
     //pktCurRound = new vector<Packet*>;
 
-    // 12222019 Mengqi
+    //12132019 Peixuan
     typedef std::map<string, Flow_pl*> FlowMap;
     FlowMap flowMap;
 }
@@ -50,6 +63,7 @@ void AFQ_100_pl::setPktCount(int pktCount) {
 void AFQ_100_pl::enque(Packet* packet) {   
     
     hdr_ip* iph = hdr_ip::access(packet);
+    hdr_tcp* tcph = hdr_tcp::access(packet);   // 03092020 Peixuan: getting tcp header for seq
     int pkt_size = packet->hdrlen_ + packet->datalen();
 
     fprintf(stderr, "AAAAA Start Enqueue Flow %d Packet\n", iph->saddr()); // Debug: Peixuan 07062019
@@ -58,7 +72,8 @@ void AFQ_100_pl::enque(Packet* packet) {
     // TODO: get theory departure Round
     // You can get flowId from iph, then get
     // "lastDepartureRound" -- departure round of last packet of this flow
-    int departureRound = cal_theory_departure_round(iph, pkt_size);
+    int departureRound = cal_theory_departure_round(iph, pkt_size, tcph); //Peixuan 03092020
+    //int departureRound = cal_theory_departure_round(iph, pkt_size);
     ///////////////////////////////////////////////////
 
     // 20190626 Yitao
@@ -86,7 +101,7 @@ void AFQ_100_pl::enque(Packet* packet) {
         return;   // 07072019 Peixuan: exceeds the maximum round
     }
    
-    //int curFlowID = iph->saddr();   // use source IP as flow id
+    // int curFlowID = iph->saddr();   // use source IP as flow id
     int curBrustness = currFlow->getBrustness();
     if ((departureRound - currentRound) >= curBrustness) {
         fprintf(stderr, "?????Exceeds maximum brustness, drop the packet from Flow %d\n", iph->saddr()); // Debug: Peixuan 07072019
@@ -118,7 +133,8 @@ void AFQ_100_pl::enque(Packet* packet) {
 }
 
 // Peixuan: This can be replaced by any other algorithms
-int AFQ_100_pl::cal_theory_departure_round(hdr_ip* iph, int pkt_size) {
+int AFQ_100_pl::cal_theory_departure_round(hdr_ip* iph, int pkt_size, hdr_tcp* tcph) {
+//int AFQ_100_pl::cal_theory_departure_round(hdr_ip* iph, int pkt_size) {
     //int		fid_;	/* flow id */
     //int		prio_;
     // parameters in iph
@@ -131,17 +147,18 @@ int AFQ_100_pl::cal_theory_departure_round(hdr_ip* iph, int pkt_size) {
 
     //int curFlowID = iph->saddr();   // use source IP as flow id
     //int curFlowID = iph->flowid();   // use flow id as flow id
-    //float curWeight = flows[curFlowID].getWeight();
-    //int curLastDepartureRound = flows[curFlowID].getLastDepartureRound();
-
     string key = convertKeyValue(iph->saddr(), iph->daddr());
-
-    Flow_pl* currFlow = this->getFlowPtr(iph->saddr(), iph->daddr());
-
+    //Flow_pl currFlow = *flowMap[key];   // 12142019 Peixuan: We have problem here.
+    //Flow_pl currFlow = Flow_pl(1, 2, 100);   // 12142019 Peixuan: Debug
+    Flow_pl* currFlow = this->getFlowPtr(iph->saddr(), iph->daddr()); //12142019 Peixuan fixed
 
     float curWeight = currFlow->getWeight();
     int curLastDepartureRound = currFlow->getLastDepartureRound();
     int curStartRound = max(currentRound, curLastDepartureRound);
+
+    //float curWeight = flows[curFlowID].getWeight();
+    //int curLastDepartureRound = flows[curFlowID].getLastDepartureRound();
+    //int curStartRound = max(currentRound, curLastDepartureRound);
 
     fprintf(stderr, "$$$$$Last Departure Round of Flow%d = %d\n",iph->saddr() , curLastDepartureRound); // Debug: Peixuan 07062019
     fprintf(stderr, "$$$$$Start Departure Round of Flow%d = %d\n",iph->saddr() , curStartRound); // Debug: Peixuan 07062019
@@ -150,7 +167,7 @@ int AFQ_100_pl::cal_theory_departure_round(hdr_ip* iph, int pkt_size) {
 
     int curDeaprtureRound = (int)(curStartRound + curWeight); // 07072019 Peixuan: basic test
 
-    fprintf(stderr, "$$$$$Calculated Packet From Flow:%d with Departure Round = %d\n",iph->saddr() , curDeaprtureRound); // Debug: Peixuan 07062019
+    fprintf(stderr, "$$$$$Calculated Packet %d From Flow:%d with Departure Round = %d\n", tcph->seqno(), iph->saddr(), curDeaprtureRound); // Debug: Peixuan 03092020
     // TODO: need packet length and bandwidh relation
     //flows[curFlowID].setLastDepartureRound(curDeaprtureRound);
     return curDeaprtureRound;
@@ -174,7 +191,7 @@ Packet* AFQ_100_pl::deque() {
     while (!pktCurRound.size()) {
         fprintf(stderr, "Empty Round\n"); // Debug: Peixuan 07062019
         pktCurRound = this->runRound();
-        this->setCurrentRound(currentRound + 1); // Update system virtual clock
+        this->setCurrentRound(currentRound + 10); // Update system virtual clock
         //this->deque();
     }
 

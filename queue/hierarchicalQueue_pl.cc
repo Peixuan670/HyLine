@@ -80,7 +80,8 @@ void hierarchicalQueue_pl::enque(Packet* packet) {
     // Not find the current key
     if (flowMap.find(key) == flowMap.end()) {
         //flowMap[key] = Flow_pl(iph->saddr, iph->daddr, 2, 100);
-        insertNewFlowPtr(iph->saddr(), iph->daddr(), 2, 100);
+        //insertNewFlowPtr(iph->saddr(), iph->daddr(), 2, 100);
+        this->insertNewFlowPtr(iph->saddr(), iph->daddr(), DEFAULT_WEIGHT, DEFAULT_BRUSTNESS);
     }
 
 
@@ -105,7 +106,7 @@ void hierarchicalQueue_pl::enque(Packet* packet) {
     }
 
     currFlow->setLastDepartureRound(departureRound);     // 07102019 Peixuan: only update last packet finish time if the packet wasn't dropped
-    this->updateFlowPtr(iph->saddr(), iph->daddr(),currFlow);  //12182019 Peixuan
+    this->updateFlowPtr(iph->saddr(), iph->daddr(), currFlow);  //12182019 Peixuan
     
     fprintf(stderr, "At Round: %d, Enqueue Packet from Flow %d with Finish time = %d.\n", currentRound, iph->saddr(), departureRound); // Debug: Peixuan 07072019
     
@@ -686,6 +687,7 @@ Flow_pl* hierarchicalQueue_pl::getFlowPtr(nsaddr_t saddr, nsaddr_t daddr) {
     string key = convertKeyValue(saddr, daddr);
     Flow_pl* flow; 
     if (flowMap.find(key) == flowMap.end()) {
+        //flow = this->insertNewFlowPtr(saddr, daddr, 2, 100);
         flow = this->insertNewFlowPtr(saddr, daddr, DEFAULT_WEIGHT, DEFAULT_BRUSTNESS);
     }
     flow = this->flowMap[key];

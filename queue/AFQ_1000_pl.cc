@@ -73,7 +73,8 @@ void AFQ_1000_pl::enque(Packet* packet) {
     // Not find the current key
     if (flowMap.find(key) == flowMap.end()) {
         //flowMap[key] = Flow_pl(iph->saddr, iph->daddr, 2, 100);
-        insertNewFlowPtr(iph->saddr(), iph->daddr(), 2, 100);
+        //insertNewFlowPtr(iph->saddr(), iph->daddr(), 2, 100);
+        insertNewFlowPtr(iph->saddr(), iph->daddr(), DEFAULT_WEIGHT, DEFAULT_BRUSTNESS);
     }
 
     Flow_pl* currFlow = flowMap[key];
@@ -176,7 +177,7 @@ Packet* AFQ_1000_pl::deque() {
     while (!pktCurRound.size()) {
         fprintf(stderr, "Empty Round\n"); // Debug: Peixuan 07062019
         pktCurRound = this->runRound();
-        this->setCurrentRound(currentRound + 1); // Update system virtual clock
+        this->setCurrentRound(currentRound + 100); // Update system virtual clock
         //this->deque();
     }
 

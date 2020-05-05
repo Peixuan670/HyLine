@@ -1,5 +1,6 @@
 #include "Level.h"
 #include "Flow_pl.h"
+#include "tcp.h"    // Peixuan 03092020
 #include <vector>
 #include <string>
 
@@ -12,7 +13,7 @@ private:
     static const int SET_NUMBER = 7;
     static const int SET_GRANULARITY = 100;       // TimeStamp Range of each queue set (level.cc)
     static const int DEFAULT_VOLUME = 7;
-    static const int DEFAULT_WEIGHT = 1;         // 01032019 Peixuan default weight
+    static const int DEFAULT_WEIGHT = 2;         // 01032019 Peixuan default weight
     static const int DEFAULT_BRUSTNESS = 100;    // 01032019 Peixuan default brustness
     int volume;                     // num of levels in scheduler
     int currentRound;           // current Round
@@ -52,7 +53,8 @@ public:
     void enque(Packet*);
     Packet* deque();
     void setCurrentRound(int);
-    int cal_theory_departure_round(hdr_ip*, int);
+    int cal_theory_departure_round(hdr_ip*, int, hdr_tcp*);
+    //int cal_theory_departure_round(hdr_ip*, int);
     int cal_insert_level(int, int);
     // Packet* serveCycle();
     // vector<Packet> serveUpperLevel(int &, int);
