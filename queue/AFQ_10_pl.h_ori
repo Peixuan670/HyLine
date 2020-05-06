@@ -7,13 +7,13 @@
 
 using namespace std;
 
-class AFQ_1000_pl : public Queue {
+class AFQ_10_pl : public Queue {
 private:
     static const int SET_NUMBER = 7;
-    static const int SET_GRANULARITY = 1000;       // TimeStamp Range of each queue set (level.cc)
+    static const int SET_GRANULARITY = 10;       // TimeStamp Range of each queue set (level.cc)
     static const int DEFAULT_VOLUME = 7;
     static const int DEFAULT_WEIGHT = 2;         // 01032019 Peixuan default weight
-    static const int DEFAULT_BRUSTNESS = 1000;    // 01032019 Peixuan default brustness
+    static const int DEFAULT_BRUSTNESS = 100;    // 01032019 Peixuan default brustness
     int volume;                     // num of levels in scheduler
     int currentRound;           // current Round
     int pktCount;           // packet count
@@ -47,8 +47,8 @@ private:
 public:
     //hierarchicalQueue();
     //explicit hierarchicalQueue(int);
-    AFQ_1000_pl();
-    explicit AFQ_1000_pl(int);
+    AFQ_10_pl();
+    explicit AFQ_10_pl(int);
     void enque(Packet*);
     Packet* deque();
     void setCurrentRound(int);
@@ -56,4 +56,5 @@ public:
     int cal_insert_level(int, int);
     // Packet* serveCycle();
     // vector<Packet> serveUpperLevel(int &, int);
+
 };
