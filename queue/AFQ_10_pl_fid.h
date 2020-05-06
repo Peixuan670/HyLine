@@ -13,7 +13,7 @@ private:
     static const int SET_GRANULARITY = 10;       // TimeStamp Range of each queue set (level.cc)
     static const int DEFAULT_VOLUME = 7;
     static const int DEFAULT_WEIGHT = 2;         // 01032019 Peixuan default weight
-    static const int DEFAULT_BRUSTNESS = 100;    // 01032019 Peixuan default brustness
+    static const int DEFAULT_BRUSTNESS = 1000;    // 01032019 Peixuan default brustness
     int volume;                     // num of levels in scheduler
     int currentRound;           // current Round
     int pktCount;           // packet count
