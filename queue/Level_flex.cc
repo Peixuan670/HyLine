@@ -4,7 +4,7 @@
 
 #include "Level_flex.h"
 
-Level_flex::Level_flex(): volume(4), currentIndex(0) {
+Level_flex::Level_flex(): volume(DEFAULT_VOLUME), currentIndex(0) {
 
     for (int i=0; i<volume; i++) {
         fifos[i] = new PacketQueue;

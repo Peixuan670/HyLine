@@ -11,10 +11,10 @@ using namespace std;
 
 class Level_flex {
 private:
-    static const int DEFAULT_VOLUME = 4;
+    static const int DEFAULT_VOLUME = 6;
     int volume;                         // num of fifos in one level
     int currentIndex;                   // current serve index
-    PacketQueue *fifos[4];
+    PacketQueue *fifos[DEFAULT_VOLUME];
     
     int pkt_cnt;                        // 01132021 Peixuan debug
 
